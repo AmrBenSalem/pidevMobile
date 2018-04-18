@@ -1,0 +1,10 @@
+/build/
+/native/
+/nbproject/
+/override/
+build.xml
+codenameone_settings.properties
+CodeNameOneBuildClient.jar
+icon.png
+JavaSE.jar
+manifest.mf
