@@ -2,6 +2,7 @@ package com.mycompany.myapp;
 
 
 import CoVoiturage.gui.CoVoiturage;
+import CoVoiturage.services.CoVoiturageParser;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -35,6 +36,7 @@ public class MyApplication {
 
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
+        
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
@@ -50,11 +52,8 @@ public class MyApplication {
         }
         Form hi = new Form("Hi World", BoxLayout.y());
         hi.add(new Label("Hi World"));
-        
-        Map x = WebService.getResponse("http://localhost/pidev2/web/app_dev.php/covoiturage/api/offres/alll");
-        System.out.println();
         CoVoiturage c = new CoVoiturage();
-        c.getForm().show();
+        
         //hi.show();
     }
 
