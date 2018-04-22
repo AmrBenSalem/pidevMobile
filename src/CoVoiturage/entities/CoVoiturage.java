@@ -14,7 +14,7 @@ package CoVoiturage.entities;
 public class CoVoiturage {
     
     private int id;
-    private int user;
+    private User user;
     private String type;
     private String depart;
     private String destination;
@@ -31,7 +31,7 @@ public class CoVoiturage {
     public CoVoiturage() {
     }
 
-    public CoVoiturage(int id, int user, String type, String depart, String destination, String date, String onetime, int placedisponibles, String depart_id, String destination_id, String created, String updated, double depart_lat, double depart_lng) {
+    public CoVoiturage(int id, User user, String type, String depart, String destination, String date, String onetime, int placedisponibles, String depart_id, String destination_id, String created, String updated, double depart_lat, double depart_lng) {
         this.id = id;
         this.user = user;
         this.type = type;
@@ -48,7 +48,7 @@ public class CoVoiturage {
         this.depart_lng = depart_lng;
     }
 
-    public CoVoiturage(int user, String type, String depart, String destination, String date, String onetime, int placedisponibles, String depart_id, String destination_id, String created, String updated, double depart_lat, double depart_lng) {
+    public CoVoiturage(User user, String type, String depart, String destination, String date, String onetime, int placedisponibles, String depart_id, String destination_id, String created, String updated, double depart_lat, double depart_lng) {
         this.user = user;
         this.type = type;
         this.depart = depart;
@@ -72,11 +72,11 @@ public class CoVoiturage {
         this.id = id;
     }
 
-    public int getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

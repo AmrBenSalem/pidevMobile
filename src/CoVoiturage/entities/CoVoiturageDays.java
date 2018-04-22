@@ -40,6 +40,9 @@ public class CoVoiturageDays {
         this.samedi = samedi;
         this.idc = idc;
     }
+
+    public CoVoiturageDays() {
+    }
     
     
 
@@ -130,6 +133,11 @@ public class CoVoiturageDays {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "CoVoiturageDays{" + "id=" + id + ", lundi=" + lundi + ", mardi=" + mardi + ", mercredi=" + mercredi + ", jeudi=" + jeudi + ", vendredi=" + vendredi + ", samedi=" + samedi + ", idc=" + idc + '}';
     }
     
     

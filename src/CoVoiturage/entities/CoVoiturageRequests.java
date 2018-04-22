@@ -18,6 +18,11 @@ public class CoVoiturageRequests {
     private String etat;
     private String created;
 
+    public CoVoiturageRequests() {
+    }
+
+    
+    
     public CoVoiturageRequests(int idc, int user, String etat, String created) {
         this.idc = idc;
         this.user = user;

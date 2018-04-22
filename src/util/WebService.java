@@ -24,10 +24,10 @@ public class WebService {
     static Map h;
     
     public static Map<String, Object> getResponse(String url){
-        
+        url = "http://localhost/pidev2/web/app_dev.php/"+url;
         ConnectionRequest r = new ConnectionRequest();
         r.setUrl(url);
-        r.setPost(false);
+        //r.setPost(false);
         InfiniteProgress prog = new InfiniteProgress();
         Dialog dlg = prog.showInifiniteBlocking();
         r.setDisposeOnCompletion(dlg);
@@ -36,12 +36,6 @@ public class WebService {
                 JSONParser p = new JSONParser();
                 Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
                 h= p.parseJSON(targetReader);
-                /*h=p.parseJSON(targetReader);
-                ArrayList l = (ArrayList) h.get("covoiturage");
-                for (int i=0;i<l.size();i++){
-                    //System.out.println(i+"aaa"+l.get(i));
-                    System.out.println(new HashMap((Map) l.get(i)).get("user"));
-                }*/
                 
             } catch (IOException ex) {
                 //Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,26 +45,6 @@ public class WebService {
         NetworkManager.getInstance().addToQueueAndWait(r);
         return h; 
     }
-    
-    /*ConnectionRequest r = conn();
-        r.addResponseListener((evt) -> {
-            try {
-                Map h;
-                JSONParser p = new JSONParser();
-                Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
-                h=p.parseJSON(targetReader);
-                ArrayList l = (ArrayList) h.get("covoiturage");
-                for (int i=0;i<l.size();i++){
-                    //System.out.println(i+"aaa"+l.get(i));
-                    System.out.println(new HashMap((Map) l.get(i)).get("user"));
-                }
-                
-            } catch (IOException ex) {
-                //Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-            }
- 
-        });*/
-    
-    
+     
     
 }
