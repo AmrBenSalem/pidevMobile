@@ -6,10 +6,17 @@
 package CoVoiturage.gui;
 
 import CoVoiturage.entities.CoVoiturage;
+import CoVoiturage.entities.CoVoiturageDays;
+import CoVoiturage.services.CoVoiturageParser;
+import CoVoiturage.util.WebService;
+import com.codename1.ui.BrowserComponent;
+import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BoxLayout;
+import java.util.Map;
 
 /**
  *
@@ -18,18 +25,98 @@ import com.codename1.ui.layouts.BoxLayout;
 public class CoVoiturageInfo {
 
     Form f;
+
     CoVoiturageInfo(Form back, CoVoiturage cov) {
+
+        this.f = new Form("Informations", new BoxLayout(BoxLayout.Y_AXIS));
+
+        Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container destinationLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container placesLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container quotidiennementLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
+        Container dateLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
+
+        Container c = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        Label depart = new Label("Depart : ");
+        depart.getAllStyles().setFgColor(0xef6262);
+        departLine.add(depart);
+        departLine.add(cov.getDepart());
+        c.add(departLine);
+
+        Label destination = new Label("Destination : ");
+        destination.getAllStyles().setFgColor(0xef6262);
+        destinationLine.add(destination);
+        destinationLine.add(cov.getDestination());
+        c.add(destinationLine);
         
-        this.f = new Form("Les offres",new BoxLayout(BoxLayout.Y_AXIS));
+        Label quotidiennement = new Label("Quotidiennement : ");
+        quotidiennement.getAllStyles().setFgColor(0xef6262);
+        quotidiennementLine.add(quotidiennement);
+        if (cov.getOnetime().equals("off")){
+            quotidiennementLine.add("Non");
+            Label date = new Label("Date : ");
+            date.getAllStyles().setFgColor(0xef6262);
+            dateLine.add(date);
+            dateLine.add(cov.getDate());   
+        } else {
+            quotidiennementLine.add("Oui");
+            Label date = new Label("Les jours : ");
+            date.getAllStyles().setFgColor(0xef6262);
+            dateLine.add(date);
+            System.out.println(cov.getId());
+            Map x = WebService.getResponse("covoiturage/api/days?idc="+cov.getId());
+            CoVoiturageDays cod = CoVoiturageParser.getListCoVoiturageDays(x);
+            String days = "";
+            if (cod.getLundi() != null) {
+                days = days + " Lundi";
+            }
+            if (cod.getMardi() != null) {
+                days = days + " Mardi";
+            }
+            if (cod.getMercredi() != null) {
+                days = days + " Mercredi";
+            }
+            if (cod.getJeudi() != null) {
+                days = days + " Jeudi";
+            }
+            if (cod.getVendredi() != null) {
+                days = days + " Vendredi";
+            }
+            if (cod.getSamedi() != null) {
+                days = days + " Samedi";
+            }
+            dateLine.add(days);   
+        }
+        
+        c.add(quotidiennementLine);
+        c.add(dateLine);
+        
+        if (cov.getType().equals("o")){
+            Label places = new Label("Places disponibles: ");
+            places.getAllStyles().setFgColor(0xef6262);
+            placesLine.add(places);
+            placesLine.add(""+cov.getPlacedisponibles());
+            c.add(placesLine);
+        }
+        
+        
+
+        BrowserComponent browser = new BrowserComponent();
+        browser.setScrollVisible(false);
+        browser.setURL("http://localhost/pidev2/web/app_dev.php/covoiturage/api/map?departid=" + cov.getDepart_id() + "&destinationid=" + cov.getDestination_id());
+        
+        this.f.add(c);
+        this.f.add(browser);
+
         this.f.show();
         Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e->{
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
             back.showBack();
         });
     }
-    
-    public Form getForm(){
+
+    public Form getForm() {
         return this.f;
     }
-    
+
 }
