@@ -57,7 +57,8 @@ public class CoVoiturageInfo {
             Label date = new Label("Date : ");
             date.getAllStyles().setFgColor(0xef6262);
             dateLine.add(date);
-            dateLine.add(cov.getDate());   
+            Map m = WebService.getResponse("covoiturage/api/offres/date?id="+cov.getId());
+            dateLine.add((String) m.get("covoituragedate"));   
         } else {
             quotidiennementLine.add("Oui");
             Label date = new Label("Les jours : ");

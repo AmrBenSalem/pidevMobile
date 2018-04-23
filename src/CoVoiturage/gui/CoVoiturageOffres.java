@@ -71,7 +71,9 @@ public class CoVoiturageOffres {
             bottom.setLayout(new LayeredLayout());
             Container left = new Container(new FlowLayout(LEFT));
             Container right = new Container(new FlowLayout(RIGHT));
-            left.add(new Label(cov.getUser().getUserName()));
+            Map m = WebService.getResponse("covoiturage/api/offres/ago?id="+cov.getId());
+            left.add(new Label(m.get("covoiturageago")+", by "+cov.getUser().getUserName()));
+            
             Button info = null;
             try {
                 info = new Button(Image.createImage("/information.jpg"));
