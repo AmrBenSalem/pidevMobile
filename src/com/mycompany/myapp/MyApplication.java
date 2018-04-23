@@ -1,8 +1,10 @@
 package com.mycompany.myapp;
 
 
+import CoVoiturage.entities.User;
 import CoVoiturage.gui.CoVoiturageView;
 import CoVoiturage.services.CoVoiturageParser;
+import CoVoiturage.util.Db;
 import com.codename1.components.InfiniteProgress;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -52,6 +54,10 @@ public class MyApplication {
         }
         Form hi = new Form("Hi World", BoxLayout.y());
         hi.add(new Label("Hi World"));
+        User user = new User();
+        user.setId(5);
+        user.setUserName("amr");
+        Db.getInstance().insertUser(user);
         CoVoiturageView c = new CoVoiturageView(hi);
         
         //hi.show();

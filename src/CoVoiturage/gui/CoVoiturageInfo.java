@@ -8,8 +8,10 @@ package CoVoiturage.gui;
 import CoVoiturage.entities.CoVoiturage;
 import CoVoiturage.entities.CoVoiturageDays;
 import CoVoiturage.services.CoVoiturageParser;
+import CoVoiturage.util.Db;
 import CoVoiturage.util.WebService;
 import com.codename1.ui.BrowserComponent;
+import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -27,7 +29,6 @@ public class CoVoiturageInfo {
     Form f;
 
     CoVoiturageInfo(Form back, CoVoiturage cov) {
-
         this.f = new Form("Informations", new BoxLayout(BoxLayout.Y_AXIS));
 
         Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -64,7 +65,6 @@ public class CoVoiturageInfo {
             Label date = new Label("Les jours : ");
             date.getAllStyles().setFgColor(0xef6262);
             dateLine.add(date);
-            System.out.println(cov.getId());
             Map x = WebService.getResponse("covoiturage/api/days?idc="+cov.getId());
             CoVoiturageDays cod = CoVoiturageParser.getListCoVoiturageDays(x);
             String days = "";
@@ -100,7 +100,12 @@ public class CoVoiturageInfo {
             c.add(placesLine);
         }
         
-        
+        Db d = Db.getInstance();
+        if (cov.getUser().getId() == d.getUser().getId()){
+            System.out.println("here");
+            Button delete = new Button("Supprimer");
+            c.add(delete);
+        }
 
         BrowserComponent browser = new BrowserComponent();
         browser.setScrollVisible(false);
