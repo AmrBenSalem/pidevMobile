@@ -71,6 +71,7 @@ public class CoVoiturageParser {
     }
     
     public static CoVoiturageDays getListCoVoiturageDays(Map m){
+        System.out.println(m);
         Map f = (Map) m.get("covoituragedays");
         //Map f =  (Map) d.get(0);
         //System.out.println(d);
