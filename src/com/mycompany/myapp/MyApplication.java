@@ -58,7 +58,7 @@ public class MyApplication {
         user.setId(5);
         user.setUserName("amr");
         Db.getInstance().insertUser(user);
-        CoVoiturageView c = new CoVoiturageView(hi);
+        CoVoiturageView c = new CoVoiturageView();
         
         //hi.show();
     }
