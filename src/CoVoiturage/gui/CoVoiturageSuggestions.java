@@ -16,6 +16,7 @@ import com.codename1.ui.Button;
 import static com.codename1.ui.CN.LEFT;
 import static com.codename1.ui.CN.RIGHT;
 import com.codename1.ui.Container;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
@@ -26,6 +27,7 @@ import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.LayeredLayout;
+import com.codename1.ui.plaf.Border;
 import java.io.IOException;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
@@ -68,13 +70,17 @@ public class CoVoiturageSuggestions {
                 Label depart = new Label("Depart : ");
                 depart.getAllStyles().setFgColor(0xef6262);
                 departLine.add(depart);
-                departLine.add(cov.getDepart());
+                Label dep = new Label(cov.getDepart());
+                dep.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
+                departLine.add(dep);
                 oneLine.add(departLine);
 
                 Label destination = new Label("Destination : ");
                 destination.getAllStyles().setFgColor(0xef6262);
                 destinationLine.add(destination);
-                destinationLine.add(cov.getDestination());
+                Label dest = new Label(cov.getDestination());
+                dest.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
+                destinationLine.add(dest);
                 oneLine.add(destinationLine);
                 //oneLine.add(new Label(cov.getUser().getUserName()));
 
@@ -83,11 +89,13 @@ public class CoVoiturageSuggestions {
                 Container left = new Container(new FlowLayout(LEFT));
                 Container right = new Container(new FlowLayout(RIGHT));
                 Map m = WebService.getResponse("covoiturage/api/offres/ago?id=" + cov.getId());
-                left.add(new Label(m.get("covoiturageago") + ", by " + cov.getCov().getUser().getUserName()));
+                Label by = new Label(m.get("covoiturageago") + ", by " + cov.getCov().getUser().getUserName());
+                by.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_ITALIC, Font.SIZE_SMALL));
+                left.add(by);
                 Button info = null;
                 try {
                     info = new Button(Image.createImage("/information.jpg"));
-
+                    info.getAllStyles().setBorder(Border.createEmpty());
                 } catch (IOException ex) {
                     //Logger.getLogger(CoVoiturageOffres.class.getName()).log(Level.SEVERE, null, ex);
                 }
