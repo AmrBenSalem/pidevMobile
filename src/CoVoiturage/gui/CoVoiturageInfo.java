@@ -106,8 +106,8 @@ public class CoVoiturageInfo {
             Button delete = new Button("Supprimer");
             delete.addActionListener((evt) -> {
                 WebService.getResponse("covoiturage/api/offres/delete?id=" + cov.getId());
-                CoVoiturageView c1 = new CoVoiturageView(4);
-                CoVoiturageOffres c2 = new CoVoiturageOffres(c1.getForm());
+                CoVoiturageView c1 = new CoVoiturageView();
+                CoVoiturageOffres c2 = new CoVoiturageOffres(c1.getForm(),cov.getType());
             });
             c.add(delete);
         } else {

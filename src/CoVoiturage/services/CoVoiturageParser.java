@@ -68,8 +68,11 @@ public class CoVoiturageParser {
             cov.setEtat((String) f.get("etat"));
             Map user = (Map) f.get("user");
             ll = (Double) user.get("id");
-            cov.setUser(ll.intValue());
-            CovList.add(cov);  
+            User c = new User(ll.intValue(),user.get("username").toString(), user.get("nom").toString(), user.get("prenom").toString());
+            cov.setUser(c);
+            cov.setCreated((String) f.get("created"));
+            CovList.add(cov);
+      
         }        
         return CovList;
     }

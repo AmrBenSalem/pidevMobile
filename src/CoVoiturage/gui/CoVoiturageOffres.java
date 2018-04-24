@@ -37,16 +37,21 @@ public class CoVoiturageOffres {
 
     Form f;
 
-    CoVoiturageOffres(Form back) {
+    CoVoiturageOffres(Form back,String type) {
 
-        this.f = new Form("Les offres", new BoxLayout(BoxLayout.Y_AXIS));
+        if (type.equals("o")){   
+            this.f = new Form("Les offres", new BoxLayout(BoxLayout.Y_AXIS));
+        } else {
+           this.f = new Form("Les demandes", new BoxLayout(BoxLayout.Y_AXIS)); 
+        }
 
 //        Container list = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 //        list.setScrollableY(true);
 
         
 
-        Map x = WebService.getResponse("covoiturage/api/offres?type=o");
+        Map x = WebService.getResponse("covoiturage/api/offres?type="+type);
+        System.out.println(x);
         ArrayList listCov = CoVoiturageParser.getListCoVoiturage(x);
         //System.out.println(listCov);
         Button suggestions = new Button("Voir nos suggestions");
