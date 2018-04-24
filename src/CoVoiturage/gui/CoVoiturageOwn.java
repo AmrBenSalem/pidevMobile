@@ -48,18 +48,19 @@ public class CoVoiturageOwn {
 //        list.setScrollableY(true);
         Db d = Db.getInstance();
         Map x = WebService.getResponse("covoiturage/api/requests/own2?type=" + type + "&iduser=" + d.getUser().getId());
-        System.out.println("1 : " + x);
         ArrayList listCov = CoVoiturageParser.getListCoVoiturage(x);
-        System.out.println("2 : " + listCov);
         ArrayList listCor = CoVoiturageParser.getListCoVoiturageRequests(x);
-        System.out.println("3 : " + listCor);
 
-        Button suggestions = new Button("Voir nos suggestions");
+        Button suggestions = new Button("My requests");
         suggestions.addActionListener((evt) -> {
-            CoVoiturageSuggestions cos = new CoVoiturageSuggestions(this.f, listCov);
+            CoVoiturageRequestsView cos = new CoVoiturageRequestsView(this.f,type);
         });
         this.f.add(suggestions);
 
+        if (listCov.size()==0){
+            this.f.add("Aucun résultat");
+        }
+        else {
         for (Object covv : listCov) {
 
             CoVoiturage cov = (CoVoiturage) covv;
@@ -117,7 +118,7 @@ public class CoVoiturageOwn {
 
             for (Object corr : listCor) {
                 CoVoiturageRequests cor = (CoVoiturageRequests) corr;
-                if (cor.getIdc() == cov.getId()) {
+                if (cor.getIdc().getId() == cov.getId()) {
                     Container oneLine2 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 
                     Container bottom2 = new Container();
@@ -182,7 +183,7 @@ public class CoVoiturageOwn {
             }
 
         }
-
+        }
         this.f.show();
         Toolbar tb = this.f.getToolbar();
         tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {

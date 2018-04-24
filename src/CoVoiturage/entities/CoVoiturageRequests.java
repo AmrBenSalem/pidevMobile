@@ -13,7 +13,7 @@ package CoVoiturage.entities;
 public class CoVoiturageRequests {
     
     private int id;
-    private int idc;
+    private CoVoiturage idc;
     private User user;
     private String etat;
     private String created;
@@ -23,14 +23,14 @@ public class CoVoiturageRequests {
 
     
     
-    public CoVoiturageRequests(int idc, User user, String etat, String created) {
+    public CoVoiturageRequests(CoVoiturage idc, User user, String etat, String created) {
         this.idc = idc;
         this.user = user;
         this.etat = etat;
         this.created = created;
     }
     
-    public CoVoiturageRequests(int id,int idc, User user, String etat, String created) {
+    public CoVoiturageRequests(int id,CoVoiturage idc, User user, String etat, String created) {
         this.id=id;
         this.idc = idc;
         this.user = user;
@@ -47,11 +47,11 @@ public class CoVoiturageRequests {
         this.id = id;
     }
 
-    public int getIdc() {
+    public CoVoiturage getIdc() {
         return idc;
     }
 
-    public void setIdc(int idc) {
+    public void setIdc(CoVoiturage idc) {
         this.idc = idc;
     }
 
