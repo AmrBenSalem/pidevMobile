@@ -154,6 +154,10 @@ public class CoVoiturageView {
         this.getForm().show();
     }
     
+    public CoVoiturageView(int x){
+        
+    }
+    
     public Form getForm(){
         return this.f;
     }
