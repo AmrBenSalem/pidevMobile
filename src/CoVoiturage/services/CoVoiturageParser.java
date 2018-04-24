@@ -33,8 +33,10 @@ public class CoVoiturageParser {
             cov.setDestination((String) f.get("destination"));
             cov.setOnetime((String) f.get("onetime"));
             ll = (Double) f.get("placedisponibles");
-            cov.setPlacedisponibles(ll.intValue());
             cov.setType((String) f.get("type"));
+            if (cov.getType().equals("o")){
+                cov.setPlacedisponibles(ll.intValue());
+            }
             Map user = (Map) f.get("user");
             ll = (Double) user.get("id");
             User c = new User(ll.intValue(),user.get("username").toString(), user.get("nom").toString(), user.get("prenom").toString());
@@ -53,6 +55,7 @@ public class CoVoiturageParser {
     public static ArrayList<CoVoiturageRequests> getListCoVoiturageRequests(Map m){
         ArrayList CovList = new ArrayList();
         
+        if (m.get("covoituragerequests").equals("no")) return null;
         ArrayList d = (ArrayList) m.get("covoituragerequests");
         //Map f =  (Map) d.get(0);
         //System.out.println(d);
@@ -63,8 +66,33 @@ public class CoVoiturageParser {
             Double ll = (Double) f.get("id");
             cov.setId(ll.intValue());
             Map idc = (Map) f.get("idc");
-            ll = (Double) idc.get("id");
-            cov.setIdc(ll.intValue());
+            
+            
+            CoVoiturage covv = new CoVoiturage();
+            Double lll = (Double) idc.get("id");
+            covv.setId(lll.intValue());
+            covv.setDepart((String) idc.get("depart"));
+            covv.setDestination((String) idc.get("destination"));
+            covv.setOnetime((String) idc.get("onetime"));
+            lll = (Double) idc.get("placedisponibles");
+            covv.setType((String) idc.get("type"));
+            if (covv.getType().equals("o")){
+                covv.setPlacedisponibles(lll.intValue());
+            }
+            Map user2 = (Map) idc.get("user");
+            lll = (Double) user2.get("id");
+            User cc = new User(ll.intValue(),user2.get("username").toString(), user2.get("nom").toString(), user2.get("prenom").toString());
+            covv.setUser(cc);
+            covv.setDepart_id((String) idc.get("departId"));
+            covv.setDestination_id((String) idc.get("destinationId"));
+            covv.setDepart_lat((double) idc.get("departLat"));
+            covv.setDepart_lng((double) idc.get("departLng"));
+            //covv.setCreated((String) idc.get("created"));
+            cov.setIdc(covv);
+            
+            
+            //ll = (Double) idc.get("id");
+            //cov.setIdc(ll.intValue());
             cov.setEtat((String) f.get("etat"));
             Map user = (Map) f.get("user");
             ll = (Double) user.get("id");

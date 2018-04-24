@@ -6,11 +6,11 @@
 package CoVoiturage.gui;
 
 import CoVoiturage.entities.CoVoiturage;
+import CoVoiturage.entities.CoVoiturageRequests;
 import CoVoiturage.services.CoVoiturageParser;
+import CoVoiturage.util.Db;
 import CoVoiturage.util.WebService;
 import com.codename1.components.ScaleImageLabel;
-import com.codename1.location.Location;
-import com.codename1.location.LocationManager;
 import com.codename1.ui.Button;
 import static com.codename1.ui.CN.LEFT;
 import static com.codename1.ui.CN.RIGHT;
@@ -33,39 +33,35 @@ import java.util.Map;
  *
  * @author Justpro
  */
-public class CoVoiturageOffres {
+public class CoVoiturageRequestsView {
 
     Form f;
 
-    CoVoiturageOffres(Form back,String type) {
+    public CoVoiturageRequestsView(Form back, String type) {
 
-        if (type.equals("o")){   
-            this.f = new Form("Les offres", new BoxLayout(BoxLayout.Y_AXIS));
-        } else {
-           this.f = new Form("Les demandes", new BoxLayout(BoxLayout.Y_AXIS)); 
-        }
-
-//        Container list = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-//        list.setScrollableY(true);
-
-        
-
-        Map x = WebService.getResponse("covoiturage/api/offres?type="+type);
-        System.out.println(x);
-        ArrayList listCov = CoVoiturageParser.getListCoVoiturage(x);
+        this.f = new Form("My requests", new BoxLayout(BoxLayout.Y_AXIS));
+        Db d = Db.getInstance();
+        Map x = WebService.getResponse("covoiturage/api/requests/own?id=" + d.getUser().getId());
+        ArrayList listCov = CoVoiturageParser.getListCoVoiturageRequests(x);
         //System.out.println(listCov);
-        Button suggestions = new Button("Voir nos suggestions");
+        Button suggestions = null;
+        if (type.equals("o")) {
+            suggestions = new Button("Mes offres");
+        } else {
+            suggestions = new Button("Mes demandes");
+        }
         suggestions.addActionListener((evt) -> {
-            CoVoiturageSuggestions cos = new CoVoiturageSuggestions(this.f,listCov);
+            CoVoiturageOwn cow = new CoVoiturageOwn(back, type);
         });
         this.f.add(suggestions);
-        if (listCov.size() == 0){
-            this.f.add("Aucun résultat");
+
+        if (listCov == null){
+            this.f.add("Vous n'avez pas de requests");
         }
         else {
         for (Object covv : listCov) {
 
-            CoVoiturage cov = (CoVoiturage) covv;
+            CoVoiturageRequests cov = (CoVoiturageRequests) covv;
             Container oneLine = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container destinationLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -73,13 +69,13 @@ public class CoVoiturageOffres {
             Label depart = new Label("Depart : ");
             depart.getAllStyles().setFgColor(0xef6262);
             departLine.add(depart);
-            departLine.add(cov.getDepart());
+            departLine.add(cov.getIdc().getDepart());
             oneLine.add(departLine);
 
             Label destination = new Label("Destination : ");
             destination.getAllStyles().setFgColor(0xef6262);
             destinationLine.add(destination);
-            destinationLine.add(cov.getDestination());
+            destinationLine.add(cov.getIdc().getDestination());
             oneLine.add(destinationLine);
             //oneLine.add(new Label(cov.getUser().getUserName()));
 
@@ -89,7 +85,26 @@ public class CoVoiturageOffres {
             Container right = new Container(new FlowLayout(RIGHT));
             //Map m = WebService.getResponse("covoiturage/api/offres/ago?id=" + cov.getId());
             left.add(new Label(cov.getCreated() + ", by " + cov.getUser().getUserName()));
+            //Label etat = new Label("Etat : ");
+            //etat.getAllStyles().setFgColor(0xef6262);
+            //left.add(etat);
+            
 
+            Container bottom2 = new Container();
+            bottom2.setLayout(new LayeredLayout());
+            Container left2 = new Container(new FlowLayout(LEFT));
+            Container right2 = new Container(new FlowLayout(RIGHT));
+            if (cov.getEtat().equals("a")) {
+                left2.add("En attente");
+            }
+            if (cov.getEtat().equals("r")) {
+                left2.add("Refusé");
+                WebService.getResponse("covoiturage/api/requests/delete?id=" + cov.getId());
+            }
+            if (cov.getEtat().equals("c")) {
+                left2.add("Accepté");
+            }
+            
             Button info = null;
             try {
                 info = new Button(Image.createImage("/information.jpg"));
@@ -98,14 +113,25 @@ public class CoVoiturageOffres {
                 //Logger.getLogger(CoVoiturageOffres.class.getName()).log(Level.SEVERE, null, ex);
             }
             right.add(info);
+            if (!cov.getEtat().equals("r")) {
+                Button annuler = new Button("Annuler");
+                annuler.addActionListener((evt) -> {
+                    WebService.getResponse("covoiturage/api/requests/delete?id=" + cov.getId());
+                    CoVoiturageRequestsView cow = new CoVoiturageRequestsView(back, type);
+                });
+                right2.add(annuler);
+            }
             bottom.add(left);
             bottom.add(right);
+            bottom2.add(left2);
+            bottom2.add(right2);
             oneLine.add(bottom);
+            oneLine.add(bottom2);
 
             info.addPointerPressedListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    CoVoiturageInfo covi = new CoVoiturageInfo(f, cov);
+                    CoVoiturageInfo covi = new CoVoiturageInfo(f, cov.getIdc());
                 }
 
             });
@@ -127,8 +153,7 @@ public class CoVoiturageOffres {
         });
     }
 
-    public Form getForm() {
-        return this.f;
+    public Form getF() {
+        return f;
     }
-
 }

@@ -112,7 +112,7 @@ public class CoVoiturageInfo {
             c.add(delete);
         } else {
             Map m = WebService.getResponse("covoiturage/api/requests/own?id=" + d.getUser().getId());
-            if (m.get("ownrequests").equals("no")) {
+            if (m.get("covoituragerequests").equals("no")) {
                 Button request = new Button("Request");
                 request.addActionListener((evt) -> {
                     WebService.getResponse("covoiturage/api/requests/add?id=" + cov.getId()+"&iduser="+d.getUser().getId());
