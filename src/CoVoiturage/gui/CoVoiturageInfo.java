@@ -102,9 +102,20 @@ public class CoVoiturageInfo {
         
         Db d = Db.getInstance();
         if (cov.getUser().getId() == d.getUser().getId()){
-            System.out.println("here");
             Button delete = new Button("Supprimer");
+            delete.addActionListener((evt) -> {
+                
+            });
             c.add(delete);
+        } else {
+            Map m = WebService.getResponse("covoiturage/api/requests/own?id="+d.getUser().getId());
+            System.out.println(m);
+            if (m.get("ownrequests").equals("no")){
+                Button request = new Button("Request");
+                c.add(request);
+            } else {
+                c.add("Vous avez déjà une demande");
+            }
         }
 
         BrowserComponent browser = new BrowserComponent();
