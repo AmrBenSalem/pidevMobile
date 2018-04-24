@@ -48,7 +48,7 @@ public class CoVoiturageOffres {
 
         Map x = WebService.getResponse("covoiturage/api/offres?type=o");
         ArrayList listCov = CoVoiturageParser.getListCoVoiturage(x);
-        System.out.println(listCov);
+        //System.out.println(listCov);
         Button suggestions = new Button("Voir nos suggestions");
         suggestions.addActionListener((evt) -> {
             CoVoiturageSuggestions cos = new CoVoiturageSuggestions(this.f,listCov);
@@ -79,8 +79,8 @@ public class CoVoiturageOffres {
             bottom.setLayout(new LayeredLayout());
             Container left = new Container(new FlowLayout(LEFT));
             Container right = new Container(new FlowLayout(RIGHT));
-            Map m = WebService.getResponse("covoiturage/api/offres/ago?id=" + cov.getId());
-            left.add(new Label(m.get("covoiturageago") + ", by " + cov.getUser().getUserName()));
+            //Map m = WebService.getResponse("covoiturage/api/offres/ago?id=" + cov.getId());
+            left.add(new Label(cov.getCreated() + ", by " + cov.getUser().getUserName()));
 
             Button info = null;
             try {

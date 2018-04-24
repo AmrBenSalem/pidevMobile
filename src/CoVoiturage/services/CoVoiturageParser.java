@@ -43,6 +43,8 @@ public class CoVoiturageParser {
             cov.setDestination_id((String) f.get("destinationId"));
             cov.setDepart_lat((double) f.get("departLat"));
             cov.setDepart_lng((double) f.get("departLng"));
+            cov.setCreated((String) f.get("created"));
+            //cov.setDate((String) f.get("date"));
             CovList.add(cov);  
         }        
         return CovList;

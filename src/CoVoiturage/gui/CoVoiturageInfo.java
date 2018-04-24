@@ -30,6 +30,7 @@ public class CoVoiturageInfo {
     Form f;
     
     CoVoiturageInfo(Form back, CoVoiturage cov) {
+        System.out.println(cov);
         this.f = new Form("Informations", new BoxLayout(BoxLayout.Y_AXIS));
         
         Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -100,7 +101,6 @@ public class CoVoiturageInfo {
             placesLine.add("" + cov.getPlacedisponibles());
             c.add(placesLine);
         }
-        
         Db d = Db.getInstance();
         if (cov.getUser().getId() == d.getUser().getId()) {
             Button delete = new Button("Supprimer");
