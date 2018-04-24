@@ -19,8 +19,9 @@ public class CoVoiturageSuggestion implements Comparator<CoVoiturageSuggestion> 
     String destination;
     double value;
     String updated;
+    CoVoiturage cov;
 
-    public CoVoiturageSuggestion(int id, String username, int idUser, String depart, String destination, double value,String updated) {
+    public CoVoiturageSuggestion(int id, String username, int idUser, String depart, String destination, double value,String updated,CoVoiturage cov) {
         this.id = id;
         this.username = username;
         this.idUser = idUser;
@@ -28,6 +29,7 @@ public class CoVoiturageSuggestion implements Comparator<CoVoiturageSuggestion> 
         this.destination = destination;
         this.value = value;
         this.updated = updated;
+        this.cov=cov;
     }
 
     public CoVoiturageSuggestion() {
@@ -99,6 +101,14 @@ public class CoVoiturageSuggestion implements Comparator<CoVoiturageSuggestion> 
 
     public void setUpdated(String updated) {
         this.updated = updated;
+    }
+
+    public CoVoiturage getCov() {
+        return cov;
+    }
+
+    public void setCov(CoVoiturage cov) {
+        this.cov = cov;
     }
     
     

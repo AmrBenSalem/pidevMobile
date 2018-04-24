@@ -59,9 +59,9 @@ public class CoVoiturageView {
         //menu.add(object);
         //menu.add(covoiturage);
         this.f.add(menu);
-        Map x = WebService.getResponse("covoiturage/api/days?idc=123");
+        //Map x = WebService.getResponse("covoiturage/api/days?idc=123");
         //System.out.println(x.get("covoiturage"));
-        System.out.println(CoVoiturageParser.getListCoVoiturageDays(x));
+        //System.out.println(CoVoiturageParser.getListCoVoiturageDays(x));
         /*Toolbar tb = this.f.getToolbar();
             
             tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e->{
@@ -118,10 +118,12 @@ public class CoVoiturageView {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }
         Button btnOffre = new Button("Tout les offres");
+        btnOffre.getAllStyles().setFgColor(0xffc870);
         btnOffre.addActionListener((evt) -> {
             CoVoiturageOffres covo = new CoVoiturageOffres(this.getForm());
         });
         Button btnOwnOffre = new Button("Vos offres");
+        btnOwnOffre.getAllStyles().setFgColor(0xef6262);
         btnOwnOffre.addActionListener((evt) -> {
             
         });
@@ -144,10 +146,16 @@ public class CoVoiturageView {
         btnOwnDemande.addActionListener((evt) -> {
             
         });
+        btnDemande.getAllStyles().setFgColor(0x8cd3c7);
+        btnOwnDemande.getAllStyles().setFgColor(0xef6262);
         this.getForm().add(btnDemande);
         this.getForm().add(btnOwnDemande);
         
         this.getForm().show();
+    }
+    
+    public CoVoiturageView(int x){
+        
     }
     
     public Form getForm(){
