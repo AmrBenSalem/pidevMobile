@@ -78,25 +78,24 @@ public class CoVoiturageView {
     public CoVoiturageView() {
         this.f = new Form("CoVoiturage",new BoxLayout(BoxLayout.Y_AXIS));
         //this.f.add(new Label("ss"));
-        this.f.setWidth(600);
-        Tabs menu = new Tabs();
-
-        Container object = new Container();
-        object.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        Container event = new Container();
-        event.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        Container colocation = new Container();
-        colocation.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        Container etudes = new Container();
-        etudes.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        
-        object.add(new Label("1"));
-        
-        
-      
-        Container covoiturage = new Container();
-        //covoiturage.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-        covoiturage.add(new Label("2"));
+//        Tabs menu = new Tabs();
+//
+//        Container object = new Container();
+//        object.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+//        Container event = new Container();
+//        event.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+//        Container colocation = new Container();
+//        colocation.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+//        Container etudes = new Container();
+//        etudes.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+//        
+//        object.add(new Label("1"));
+//        
+//        
+//      
+//        Container covoiturage = new Container();
+//        //covoiturage.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+//        covoiturage.add(new Label("2"));
         
         /*menu.addTab("Objects",object);
         menu.addTab("CoVoiturageView",covoiturage);
@@ -114,8 +113,10 @@ public class CoVoiturageView {
         });*/
         
         try {
-            ScaleImageLabel img = new ScaleImageLabel(Image.createImage("/OffresCov.png"));
-            this.getForm().add(img);
+            ScaleImageLabel img1 = new ScaleImageLabel(Image.createImage("/SeparatorOffre.png"));
+            ScaleImageLabel img2 = new ScaleImageLabel(Image.createImage("/OffresCov2.png"));
+            this.getForm().add(img1);
+            this.getForm().add(img2);
         } catch (IOException ex) {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -136,8 +137,12 @@ public class CoVoiturageView {
         
         
         try {
-            ScaleImageLabel img2 = new ScaleImageLabel(Image.createImage("/DemandesCov.png"));
-            this.getForm().add(img2);
+            System.out.println("eee");
+            ScaleImageLabel img3 = new ScaleImageLabel(Image.createImage("/SeparatorDemande.png"));
+            ScaleImageLabel img4 = new ScaleImageLabel(Image.createImage("/DemandeCov2.png"));
+            System.out.println("xxx");
+            this.getForm().add(img3);
+            this.getForm().add(img4);
         } catch (IOException ex) {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -24,7 +24,7 @@ public class WebService {
     static Map h;
     
     public static Map<String, Object> getResponse(String url){
-        url = "http://localhost/pidev2/web/app_dev.php/"+url;
+        url = "http://192.168.137.74/pidev2/web/app.php/"+url;
         ConnectionRequest r = new ConnectionRequest();
         r.setUrl(url);
         //r.setPost(false);
