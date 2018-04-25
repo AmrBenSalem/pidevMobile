@@ -22,6 +22,7 @@ import com.codename1.ui.Button;
 import static com.codename1.ui.CN.CENTER;
 import com.codename1.ui.Image;
 import com.codename1.ui.layouts.FlowLayout;
+import com.codename1.ui.plaf.Style;
 import java.io.IOException;
 
 /**
@@ -75,7 +76,7 @@ public class CoVoiturageView {
 //    }
 
     public CoVoiturageView() {
-        this.f = new Form("CoVoiturage",new FlowLayout(CENTER));
+        this.f = new Form("CoVoiturage",new BoxLayout(BoxLayout.Y_AXIS));
         //this.f.add(new Label("ss"));
         this.f.setWidth(600);
         Tabs menu = new Tabs();
@@ -119,12 +120,14 @@ public class CoVoiturageView {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }
         Button btnOffre = new Button("Tout les offres");
-        btnOffre.getAllStyles().setFgColor(0xffc870);
+//        btnOffre.getAllStyles().setFgColor(0xffc870);
         btnOffre.addActionListener((evt) -> {
             CoVoiturageOffres covo = new CoVoiturageOffres(this.getForm(),"o");
         });
         Button btnOwnOffre = new Button("Vos offres");
-        btnOwnOffre.getAllStyles().setFgColor(0xef6262);
+        btnOwnOffre.getStyle().setBackgroundGradientStartColor(0x202020, true);
+        
+        
         btnOwnOffre.addActionListener((evt) -> {
             CoVoiturageOwn covo = new CoVoiturageOwn(this.getForm(),"o");
         });
@@ -147,8 +150,9 @@ public class CoVoiturageView {
         btnOwnDemande.addActionListener((evt) -> {
             CoVoiturageOwn covo = new CoVoiturageOwn(this.getForm(),"d");
         });
-        btnDemande.getAllStyles().setFgColor(0x8cd3c7);
-        btnOwnDemande.getAllStyles().setFgColor(0xef6262);
+//        btnDemande.getAllStyles().setFgColor(0x8cd3c7);
+//        btnDemande.getUnselectedStyle().setBgColor(0x8cd3c7);
+//        btnOwnDemande.getAllStyles().setFgColor(0xef6262);
         this.getForm().add(btnDemande);
         this.getForm().add(btnOwnDemande);
         
