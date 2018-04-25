@@ -137,10 +137,8 @@ public class CoVoiturageView {
         
         
         try {
-            System.out.println("eee");
             ScaleImageLabel img3 = new ScaleImageLabel(Image.createImage("/SeparatorDemande.png"));
             ScaleImageLabel img4 = new ScaleImageLabel(Image.createImage("/DemandeCov2.png"));
-            System.out.println("xxx");
             this.getForm().add(img3);
             this.getForm().add(img4);
         } catch (IOException ex) {
