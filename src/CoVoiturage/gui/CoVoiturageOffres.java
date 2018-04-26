@@ -46,7 +46,6 @@ public class CoVoiturageOffres {
         } else {
            this.f = new Form("Les demandes", new BoxLayout(BoxLayout.Y_AXIS)); 
         }
-
 //        Container list = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 //        list.setScrollableY(true);
 
