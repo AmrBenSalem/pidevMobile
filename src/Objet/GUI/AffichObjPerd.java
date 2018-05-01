@@ -175,7 +175,7 @@ public class AffichObjPerd extends SliderBridge implements Animation, StyleListe
                     Label lbtitle = new Label("Type : " + o.getType());
                     SpanLabel lbdescr = new SpanLabel("Description : " + o.getDescription());
                     Label lbdatedeb = new Label("Date : " + o.getDate());
-                    SpanLabel lblieu = new SpanLabel("Lieu : " + o.getLieu());
+                    SpanLabel lblieu = new SpanLabel("Lieu : " +  o.getLieu());
 
                     lbtitle.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lbdescr.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));

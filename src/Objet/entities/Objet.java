@@ -53,7 +53,7 @@ public class Objet {
     public Objet() {
     }
 
-    public Objet(int id, int user, String Type, String Description, Date Date, String Nature, String Lieu, String Photo) {
+    public Objet( int id, int user, String Type, String Description, Date Date, String Nature, String Lieu, String Photo) {
         this.id = id;
         this.user = user;
         this.Type = Type;

@@ -72,7 +72,7 @@ public class Interaction {
     public Interaction() {
     }
 
-    public Interaction(int id, int user, int objet, String statut) {
+    public Interaction( int id, int user, int objet, String statut) {
         this.id = id;
         this.user = user;
         this.objet = objet;
