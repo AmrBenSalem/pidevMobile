@@ -45,6 +45,11 @@ public class CoVoiturageOwn {
         } else {
             this.f = new Form("Mes demandes", new BoxLayout(BoxLayout.Y_AXIS));
         }
+        
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
 
 //        Container list = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 //        list.setScrollableY(true);
@@ -202,10 +207,7 @@ public class CoVoiturageOwn {
         }
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getF() {

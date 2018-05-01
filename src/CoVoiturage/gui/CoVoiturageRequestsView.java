@@ -42,6 +42,10 @@ public class CoVoiturageRequestsView {
     public CoVoiturageRequestsView(Form back, String type) {
 
         this.f = new Form("My requests", new BoxLayout(BoxLayout.Y_AXIS));
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Db d = Db.getInstance();
         Map x = WebService.getResponse("covoiturage/api/requests/own?id=" + d.getUser().getId());
         ArrayList listCov = CoVoiturageParser.getListCoVoiturageRequests(x);
@@ -154,10 +158,7 @@ public class CoVoiturageRequestsView {
         }
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getF() {

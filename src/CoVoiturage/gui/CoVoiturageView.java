@@ -42,6 +42,7 @@ public class CoVoiturageView {
         try {
             ScaleImageLabel img1 = new ScaleImageLabel(Image.createImage("/SeparatorOffre.png"));
             ScaleImageLabel img2 = new ScaleImageLabel(Image.createImage("/OffresCov2.png"));
+            img2.setPreferredW(900);
             this.getForm().add(img1);
             this.getForm().add(img2);
         } catch (IOException ex) {
@@ -68,6 +69,7 @@ public class CoVoiturageView {
             ScaleImageLabel img4 = new ScaleImageLabel(Image.createImage("/DemandeCov2.png"));
             this.getForm().add(img3);
             this.getForm().add(img4);
+            img4.setPreferredW(900);
         } catch (IOException ex) {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }
