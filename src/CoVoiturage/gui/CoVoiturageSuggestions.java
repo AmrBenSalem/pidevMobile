@@ -45,10 +45,11 @@ public class CoVoiturageSuggestions {
 
     CoVoiturageSuggestions(Form back, ArrayList listCov) {
         this.f = new Form("Nos suggestions", new BoxLayout(BoxLayout.Y_AXIS));
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Location position = LocationManager.getLocationManager().getCurrentLocationSync();
-        if (position.getStatus() != LocationManager.AVAILABLE){
-            Dialog.show("Erreur", "L'application n'a pas pu vous localiser", "ok", "cancel");
-        }
         ArrayList<CoVoiturageSuggestion> listOfSugg = new ArrayList<>();
         Db d = Db.getInstance();
         for (Object covv : listCov) {
@@ -128,10 +129,7 @@ public class CoVoiturageSuggestions {
 
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getF() {
