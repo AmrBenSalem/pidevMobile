@@ -11,6 +11,12 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.Toolbar;
 import java.util.Map;
+import Colocation.gui.AddColocation;
+import Colocation.gui.AffichCol;
+import Colocation.gui.AffichageColoUSer;
+import Colocation.gui.AjouterColocation;
+import Colocation.gui.AjouterDemande;
+import Colocation.gui.ColocationMenu;
 import Objet.GUI.AffichObjPerd;
 import Objet.GUI.AffichObjTrouv;
 import com.codename1.ui.Container;
@@ -41,6 +47,7 @@ public class MyApplication {
       //  Log.bindCrashProtection(true);
     }
 
+
     public void start() {
         if (hi != null) {
             hi.show();
@@ -62,37 +69,10 @@ public class MyApplication {
         });
         tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {  CoVoiturageView a = new CoVoiturageView();
         });
+        tb.addMaterialCommandToSideMenu("CoLocation", FontImage.MATERIAL_WEB, e -> {  ColocationMenu a = new ColocationMenu();
+        });
         hi.addComponent(new Label("Hi World"));
         hi.show();
-       //AffichObjTrouv a =  new AffichObjTrouv();
-        /*  mainContainer = new Container();
-        mainContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-
-        mainForm = new Form();
-        mainForm.setLayout(new BorderLayout());
-        mainForm.add(BorderLayout.CENTER, mainContainer);
-        cmd1= new Command("afficher les objets perdus");
-        cmd2= new Command("afficher les objets trouvés");
-        
-        mainForm.addCommandListener(ev -> {
-            if (ev.getCommand() == cmd1) {
-                AffichObjPerd a = new AffichObjPerd();
-            }
-            if (ev.getCommand() == cmd2) {
-                AffichObjTrouv a = new AffichObjTrouv();
-            }
-        });
-                       
-        mainForm.setTitle("Les objets");
-        mainForm.show();
-      /*  Form hi = new Form("Hi World", BoxLayout.y());
-        hi.add(new Label("Hi World"));
-        User user = new User();
-        user.setId(5);
-        user.setUserName("amr");
-        Db.getInstance().insertUser(user);*/
-
-
     }
 
     public void stop() {
