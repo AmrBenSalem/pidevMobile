@@ -74,6 +74,8 @@ public class ObjetService {
             // e.setDateFin((Date)f.get("dateFin"));
             //e.setCreatedAt((Date)f.get("createdAt"));
             o.setLieu((String) f.get("lieu"));
+            String username = new String(((String) ((Map<String, Object>) f.get("user")).get("username")));
+            o.setNature(username);
 
             //   e.setNb_max(((Double) f.get("nbMax")).intValue());
             listobjet.add(o);
@@ -142,16 +144,16 @@ public class ObjetService {
             @Override
             protected void postResponse() {
                 Dialog.show("Succes", "Cet Objet Perdu a été trouvé par vous", "ok", null);
-              
+
             }
         };
 
         connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
         NetworkManager.getInstance().addToQueue(connectionRequest);
-         
+
     }
-    
-     public void ajouterReclamationObjTrouv(Objet o) {
+
+    public void ajouterReclamationObjTrouv(Objet o) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -161,11 +163,10 @@ public class ObjetService {
 
         connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
         NetworkManager.getInstance().addToQueue(connectionRequest);
-   
+
     }
-     
-     
-     public void SupprimerReclamation(Objet o) {
+
+    public void SupprimerReclamation(Objet o) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -175,7 +176,7 @@ public class ObjetService {
 
         connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/suppprec/" + o.getId());
         NetworkManager.getInstance().addToQueue(connectionRequest);
-   
+
     }
 
 }

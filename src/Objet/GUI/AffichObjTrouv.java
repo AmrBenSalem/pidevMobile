@@ -35,6 +35,7 @@ import com.codename1.ui.events.StyleListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -51,14 +52,22 @@ import java.util.Map;
 public class AffichObjTrouv extends SliderBridge implements Animation, StyleListener {
 
     Form f;
+    private Resources theme;
     Form f2;
     SpanLabel lb;
     EncodedImage encoded;
 
     public AffichObjTrouv() {
 
-        f = new Form();
+        f = new Form("Les Objets Trouvés");
+        Toolbar tb = f.getToolbar();
 
+        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
+            AffichObjPerd a = new AffichObjPerd();
+        });
+        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {
+            AffichObjTrouv a = new AffichObjTrouv();
+        });
         ObjetService objserv = new ObjetService();
         Map x = WebService.getResponse("objtrouv");
         System.out.println("retour objets trouv" + x);
@@ -101,10 +110,11 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
             SpanLabel l2 = new SpanLabel(o.getDescription());
             Label lnb = new Label(o.getLieu());
             lnb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
-
+Label l4 = new Label("Posté Par : " + o.getNature());
             SpanLabel l6 = new SpanLabel(o.getLieu());
             ph.add(img);
             l.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
+                       l4.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
             l2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
 
             title.add(tit);
@@ -116,8 +126,9 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
 
             bouhom.add(ph);
             bouhom.add(title);
-            bouhom.add(C2);
+
             bouhom.add(ctnnb);
+            bouhom.add(l4);
 
             bouhom.add(sepa);
 
@@ -125,6 +136,7 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
 
             f.add(bouhom);
             f.show();
+
             System.out.println("je suis là");
 
             ph.addPointerPressedListener(new ActionListener() {
@@ -158,19 +170,19 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
                     lbdescr.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lbdatedeb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lblieu.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
-
-                    f2.add(imviewer);
-           
-
-                    f2.add(lbdescr);
-                  
-
-                    f2.show();
-                    System.out.println("je suis maintenant là");
-
                     Button btnannuler = new Button("Partager");
                     Button btnparticiper = new Button("Réclamer");
                     Button btnsuppreclam = new Button("Annuler Reclamation");
+
+                    f2.add(imviewer);
+
+                    f2.add(lbdescr);
+                    f2.add(btnparticiper);
+                    f2.add(btnannuler);
+                    f2.add(btnsuppreclam);
+
+                    f2.show();
+                    System.out.println("je suis maintenant là");
 
                     btnannuler.addActionListener(new ActionListener() {
                         @Override
@@ -205,9 +217,6 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
 
                         }
                     });
-                    f2.add(btnparticiper);
-                    f2.add(btnannuler);
-                    f2.add(btnsuppreclam);
 
                 }
             });
