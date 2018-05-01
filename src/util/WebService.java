@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CoVoiturage.util;
+package util;
 
 import com.codename1.components.InfiniteProgress;
 import com.codename1.io.ConnectionRequest;
@@ -22,13 +22,15 @@ import java.util.Map;
  */
 public class WebService {
     static Map h;
-    public static String ip="192.168.43.215";
     
     public static Map<String, Object> getResponse(String url){
-        url = "http://"+ip+"/pidev2/web/app.php/"+url;
+        url = "http://localhost/pidev2/web/app_dev.php/"+url;
+        System.out.println("url---------------"+url);
         ConnectionRequest r = new ConnectionRequest();
+        System.out.println("url ::::::::: "+url);
         r.setUrl(url);
-        //r.setPost(false);
+        r.setPost(false);
+        System.out.println("url   :   "+r);
         InfiniteProgress prog = new InfiniteProgress();
         Dialog dlg = prog.showInifiniteBlocking();
         r.setDisposeOnCompletion(dlg);
@@ -36,6 +38,7 @@ public class WebService {
             try {
                 JSONParser p = new JSONParser();
                 Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
+                System.out.println(targetReader);
                 h= p.parseJSON(targetReader);
                 
             } catch (IOException ex) {
