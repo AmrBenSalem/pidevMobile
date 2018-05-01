@@ -80,8 +80,6 @@ public class MyApplication {
         });
         tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {  CoVoiturageView a = new CoVoiturageView();
         });
-       
-
         hi.addComponent(new Label("Hi World"));
         hi.show();
        //AffichObjTrouv a =  new AffichObjTrouv();
