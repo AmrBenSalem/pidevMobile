@@ -21,6 +21,33 @@ public class Objet {
     private String Nature;
     private String Lieu;
     private String Photo;
+     private String statut;
+    private String telephone;
+    private String nomuser;
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getNomuser() {
+        return nomuser;
+    }
+
+    public void setNomuser(String nomuser) {
+        this.nomuser = nomuser;
+    }
     private Boolean enable;
 
     public Objet() {
@@ -124,8 +151,9 @@ public class Objet {
 
     @Override
     public String toString() {
-        return "Objet{" + "id=" + id + ", user=" + user + ", Type=" + Type + ", Description=" + Description + ", Date=" + Date + ", Nature=" + Nature + ", Lieu=" + Lieu + ", Photo=" + Photo + ", enable=" + enable + '}';
+        return "Objet{" + "statut=" + statut + ", telephone=" + telephone + ", nomuser=" + nomuser + '}';
     }
+ 
 
     @Override
     public int hashCode() {

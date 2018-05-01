@@ -6,6 +6,7 @@
 package Objet.GUI;
 
 import CoVoiturage.util.WebService;
+import Objet.entities.Interaction;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -110,11 +111,11 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
             SpanLabel l2 = new SpanLabel(o.getDescription());
             Label lnb = new Label(o.getLieu());
             lnb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
-Label l4 = new Label("Posté Par : " + o.getNature());
+            Label l4 = new Label("Posté Par : " + o.getNature());
             SpanLabel l6 = new SpanLabel(o.getLieu());
             ph.add(img);
             l.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
-                       l4.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
+            l4.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
             l2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
 
             title.add(tit);
@@ -160,6 +161,16 @@ Label l4 = new Label("Posté Par : " + o.getNature());
                     }
                     im = URLImage.createToStorage(encod, o.getPhoto(), "http://localhost/pidev2/web/" + o.getPhoto());
                     imviewer = new ImageViewer(im);
+                    int a = 0;
+                    try {
+                        ArrayList<Interaction> ins = new ArrayList<>();
+                        ins = objserv.info(o);
+                        a = ins.size();
+                        System.out.println("dans laffi" + ins.toString());
+                        System.out.println(a);
+                    } catch (IndexOutOfBoundsException ex) {
+                        System.out.println(a);
+                    }
 
                     Label lbtitle = new Label("Type : " + o.getType());
                     SpanLabel lbdescr = new SpanLabel("Description : " + o.getDescription());

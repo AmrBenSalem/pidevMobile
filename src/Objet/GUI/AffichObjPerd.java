@@ -6,6 +6,7 @@
 package Objet.GUI;
 
 import CoVoiturage.util.WebService;
+import Objet.entities.Interaction;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
@@ -160,6 +161,16 @@ public class AffichObjPerd extends SliderBridge implements Animation, StyleListe
                     }
                     im = URLImage.createToStorage(encod, o.getPhoto(), "http://localhost/pidev2/web/" + o.getPhoto());
                     imviewer = new ImageViewer(im);
+                    int a = 0;
+                    try {
+                        ArrayList<Interaction> ins = new ArrayList<>();
+                        ins = objserv.info(o);
+                        a = ins.size();
+                        System.out.println("dans laffi" + ins.toString());
+                        System.out.println(a);
+                    } catch (IndexOutOfBoundsException ex) {
+                        System.out.println(a);
+                    }
 
                     Label lbtitle = new Label("Type : " + o.getType());
                     SpanLabel lbdescr = new SpanLabel("Description : " + o.getDescription());

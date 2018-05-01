@@ -16,6 +16,26 @@ public class Interaction {
     private int user;
     private int objet;
     private String statut;
+    private String telephone;
+    private String nomuser;
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getNomuser() {
+        return nomuser;
+    }
+
+    public void setNomuser(String nomuser) {
+        this.nomuser = nomuser;
+    }
+    
+   
 
     public int getId() {
         return id;
@@ -68,9 +88,10 @@ public class Interaction {
 
     @Override
     public String toString() {
-        return "Interaction{" + "id=" + id + ", user=" + user + ", objet=" + objet + ", statut=" + statut + '}';
+        return "Interaction{" + "statut=" + statut + ", telephone=" + telephone + ", nomuser=" + nomuser + '}';
     }
 
+  
     @Override
     public int hashCode() {
         int hash = 7;
