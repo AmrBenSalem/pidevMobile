@@ -16,6 +16,7 @@ import com.codename1.ui.Button;
 import static com.codename1.ui.CN.LEFT;
 import static com.codename1.ui.CN.RIGHT;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -45,6 +46,9 @@ public class CoVoiturageSuggestions {
     CoVoiturageSuggestions(Form back, ArrayList listCov) {
         this.f = new Form("Nos suggestions", new BoxLayout(BoxLayout.Y_AXIS));
         Location position = LocationManager.getLocationManager().getCurrentLocationSync();
+        if (position.getStatus() != LocationManager.AVAILABLE){
+            Dialog.show("Erreur", "L'application n'a pas pu vous localiser", "ok", "cancel");
+        }
         ArrayList<CoVoiturageSuggestion> listOfSugg = new ArrayList<>();
         Db d = Db.getInstance();
         for (Object covv : listCov) {

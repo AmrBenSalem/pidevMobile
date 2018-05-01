@@ -142,7 +142,7 @@ public class CoVoiturageInfo {
         BrowserComponent browser = new BrowserComponent();
         browser.setScrollVisible(false);
         browser.setURL("http://"+WebService.ip+"/pidev2/web/app_dev.php/covoiturage/api/map?departid=" + cov.getDepart_id() + "&destinationid=" + cov.getDestination_id());
-
+        browser.setPreferredH(500);
         this.f.add(c);
         this.f.add(browser);
 

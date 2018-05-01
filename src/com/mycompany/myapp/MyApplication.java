@@ -43,7 +43,8 @@ public class MyApplication {
     Map h;
     private Form hi;
     private Resources theme;
-     private Container mainContainer;
+    private Container mainContainer;
+    public static Toolbar tb;
  
 
     public void init(Object context) {
@@ -65,13 +66,19 @@ public class MyApplication {
         }
         hi = new Form("Hi World");
      
-        Toolbar tb = hi.getToolbar();
+        tb = hi.getToolbar();
         
-
+        User user = new User();
+        user.setId(5);
+        user.setUserName("amr");
+        Db.getInstance().insertUser(user);
+        
         tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {AffichObjPerd a = new AffichObjPerd();
         
         });
         tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {  AffichObjTrouv a = new AffichObjTrouv();
+        });
+        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {  CoVoiturageView a = new CoVoiturageView();
         });
        
 

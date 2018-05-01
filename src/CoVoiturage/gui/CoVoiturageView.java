@@ -23,6 +23,7 @@ import static com.codename1.ui.CN.CENTER;
 import com.codename1.ui.Image;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
+import com.mycompany.myapp.MyApplication;
 import java.io.IOException;
 
 /**
@@ -77,6 +78,7 @@ public class CoVoiturageView {
 
     public CoVoiturageView() {
         this.f = new Form("CoVoiturage",new BoxLayout(BoxLayout.Y_AXIS));
+        this.f.setToolbar(MyApplication.tb);
         //this.f.add(new Label("ss"));
 //        Tabs menu = new Tabs();
 //
