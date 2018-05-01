@@ -35,6 +35,7 @@ import com.codename1.ui.events.StyleListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.util.Resources;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -52,13 +53,21 @@ public class AffichObjPerd extends SliderBridge implements Animation, StyleListe
 
     Form f;
     Form f2;
+    private Resources theme;
     SpanLabel lb;
     EncodedImage encoded;
 
     public AffichObjPerd() {
 
-        f = new Form();
+        f = new Form("Les Objets Perdus");
+        Toolbar tb = f.getToolbar();
 
+        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
+            AffichObjPerd a = new AffichObjPerd();
+        });
+        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {
+            AffichObjTrouv a = new AffichObjTrouv();
+        });
         ObjetService objserv = new ObjetService();
         Map x = WebService.getResponse("objperd");
 
@@ -161,16 +170,16 @@ public class AffichObjPerd extends SliderBridge implements Animation, StyleListe
                     lbdescr.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lbdatedeb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lblieu.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
-
-                    f2.add(imviewer);
-                    f2.add(lbdescr);
-
-                    f2.show();
-                    System.out.println("je suis maintenant là");
-
                     Button btnannuler = new Button("Partager");
                     Button btnparticiper = new Button("Reclamer");
                     Button btnsuppreclam = new Button("Annuler Reclamation");
+                    f2.add(imviewer);
+                    f2.add(lbdescr);
+                    f2.add(btnparticiper);
+                    f2.add(btnannuler);
+                    f2.add(btnsuppreclam);
+                    f2.show();
+                    System.out.println("je suis maintenant là");
 
                     btnannuler.addActionListener(new ActionListener() {
                         @Override
@@ -203,9 +212,6 @@ public class AffichObjPerd extends SliderBridge implements Animation, StyleListe
 
                         }
                     });
-                    f2.add(btnparticiper);
-                    f2.add(btnannuler);
-                    f2.add(btnsuppreclam);
 
                 }
             });
