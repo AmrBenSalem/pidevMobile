@@ -5,6 +5,7 @@
  */
 package Objet.services;
 
+import CoVoiturage.util.WebService;
 import Objet.entities.Interaction;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -110,6 +111,7 @@ public class ObjetService {
             //e.setCreatedAt((Date)f.get("createdAt"));
             o.setLieu((String) f.get("lieu"));
             String username = new String(((String) ((Map<String, Object>) f.get("user")).get("username")));
+
             o.setNature(username);
 
             //   e.setNb_max(((Double) f.get("nbMax")).intValue());
@@ -134,6 +136,8 @@ public class ObjetService {
         o.setLieu((String) m.get("lieu"));
         //  e.setNb_max(((Double) m.get("nbMax")).intValue());
         o.setPhoto(m.get("photo").toString());
+
+
 
         return o;
 
@@ -178,5 +182,28 @@ public class ObjetService {
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
+    
+    public ArrayList<Interaction> info(Objet o){
+                    Interaction inte = new Interaction();
+                    ArrayList<Interaction> listobjet = new ArrayList<>();
 
+                    Map x = WebService.getResponse("affichrec/" + o.getId());
+                    ArrayList d = (ArrayList) x.get("interaction");
+                    for (int i = 0; i < x.size(); i++)
+                    {
+                    Map f = (Map) d.get(i);
+                    String telephone = new String(((String) ((Map<String, Object>) f.get("idUser")).get("telephone")));
+                    String statut = (String) f.get("statut");
+                    String username = new String(((String) ((Map<String, Object>) f.get("idUser")).get("username")));
+                    inte.setNomuser(username);
+                    inte.setTelephone(telephone);
+                    inte.setStatut(statut);
+                    listobjet.add(inte);
+                    System.out.println("aafafaf"+inte.toString());
+                    
+                    }
+                    return listobjet;
+    }
+
+    // String telephone = new String(((String) ((Map<String, Object>) f.get("user")).get("telephone")));
 }
