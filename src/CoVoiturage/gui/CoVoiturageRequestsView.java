@@ -42,6 +42,10 @@ public class CoVoiturageRequestsView {
     public CoVoiturageRequestsView(Form back, String type) {
 
         this.f = new Form("My requests", new BoxLayout(BoxLayout.Y_AXIS));
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Db d = Db.getInstance();
         Map x = WebService.getResponse("covoiturage/api/requests/own?id=" + d.getUser().getId());
         ArrayList listCov = CoVoiturageParser.getListCoVoiturageRequests(x);
@@ -90,9 +94,9 @@ public class CoVoiturageRequestsView {
             Container left = new Container(new FlowLayout(LEFT));
             Container right = new Container(new FlowLayout(RIGHT));
             
-            Label by = new Label(cov.getCreated() + ", by " + cov.getUser().getUserName());
-            by.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_ITALIC, Font.SIZE_SMALL));
-            left.add(by);
+            //Label by = new Label(cov.getCreated() + ", by " + cov.getIdc().getUser().getUserName());
+            //by.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_ITALIC, Font.SIZE_SMALL));
+            //left.add(by);
             
 
             Container bottom2 = new Container();
@@ -154,10 +158,7 @@ public class CoVoiturageRequestsView {
         }
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getF() {

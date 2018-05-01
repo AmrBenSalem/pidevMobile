@@ -31,9 +31,11 @@ public class CoVoiturageInfo {
     Form f;
 
     CoVoiturageInfo(Form back, CoVoiturage cov) {
-        System.out.println(cov);
         this.f = new Form("Informations", new BoxLayout(BoxLayout.Y_AXIS));
-
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
         Container destinationLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
         Container placesLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -141,16 +143,13 @@ public class CoVoiturageInfo {
 
         BrowserComponent browser = new BrowserComponent();
         browser.setScrollVisible(false);
-        browser.setURL("http://localhost/pidev2/web/app_dev.php/covoiturage/api/map?departid=" + cov.getDepart_id() + "&destinationid=" + cov.getDestination_id());
-
+        browser.setURL("http://"+WebService.ip+"/pidev2/web/app_dev.php/covoiturage/api/map?departid=" + cov.getDepart_id() + "&destinationid=" + cov.getDestination_id());
+        browser.setPreferredH(500);
         this.f.add(c);
         this.f.add(browser);
 
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getForm() {

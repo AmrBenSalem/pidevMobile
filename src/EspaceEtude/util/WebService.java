@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CoVoiturage.util;
+package EspaceEtude.util;
 
 import com.codename1.components.InfiniteProgress;
 import com.codename1.io.ConnectionRequest;
@@ -22,10 +22,9 @@ import java.util.Map;
  */
 public class WebService {
     static Map h;
-    public static String ip="192.168.43.215";
     
     public static Map<String, Object> getResponse(String url){
-        url = "http://"+ip+"/pidev2/web/app.php/"+url;
+            url = "http://localhost/EspritEntreAide/web/app_dev.php/"+url;
         ConnectionRequest r = new ConnectionRequest();
         r.setUrl(url);
         //r.setPost(false);
@@ -33,14 +32,15 @@ public class WebService {
         Dialog dlg = prog.showInifiniteBlocking();
         r.setDisposeOnCompletion(dlg);
         r.addResponseListener((evt) -> {
-            try {
-                JSONParser p = new JSONParser();
-                Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
-                h= p.parseJSON(targetReader);
-                
-            } catch (IOException ex) {
-                //Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    //Logger.getLogger(MyApplication.class.getName()).log(Level.SEVERE, null, ex);
+                    
+                    JSONParser p = new JSONParser();
+                    Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
+                    h= p.parseJSON(targetReader);
+                } catch (IOException ex) {
+                    //Logger.getLogger(WebService.class.getName()).log(Level.SEVERE, null, ex);
+                }
  
         });
         NetworkManager.getInstance().addToQueueAndWait(r);

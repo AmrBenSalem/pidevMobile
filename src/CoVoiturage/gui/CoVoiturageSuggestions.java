@@ -16,6 +16,7 @@ import com.codename1.ui.Button;
 import static com.codename1.ui.CN.LEFT;
 import static com.codename1.ui.CN.RIGHT;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -44,6 +45,10 @@ public class CoVoiturageSuggestions {
 
     CoVoiturageSuggestions(Form back, ArrayList listCov) {
         this.f = new Form("Nos suggestions", new BoxLayout(BoxLayout.Y_AXIS));
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Location position = LocationManager.getLocationManager().getCurrentLocationSync();
         ArrayList<CoVoiturageSuggestion> listOfSugg = new ArrayList<>();
         Db d = Db.getInstance();
@@ -124,10 +129,7 @@ public class CoVoiturageSuggestions {
 
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getF() {

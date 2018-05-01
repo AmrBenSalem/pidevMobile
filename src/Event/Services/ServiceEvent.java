@@ -7,6 +7,7 @@ package Event.Services;
 
 import CoVoiturage.entities.CoVoiturageDays;
 import CoVoiturage.entities.CoVoiturageRequests;
+import CoVoiturage.entities.User;
 import Event.Entities.Avis;
 import Event.Entities.Event;
 import com.codename1.io.CharArrayReader;
@@ -35,7 +36,7 @@ public class ServiceEvent {
         ArrayList<Event> listEvents = new ArrayList<>();
         ArrayList d = (ArrayList) m.get("root");
         //Map f =  (Map) d.get(0);
-        System.out.println("dddddddddddddd :::::::::"+d.size());
+        //System.out.println("dddddddddddddd :::::::::"+d.size());
 
         for(int i = 0; i<d.size();i++){
             Map f =  (Map) d.get(i);
@@ -49,8 +50,11 @@ public class ServiceEvent {
             e.setDescription((String) f.get("description"));
             e.setCategorie((String) f.get("categorie"));
             e.setPhoto((String) f.get("photo"));
-            e.setDateDebut((Date)f.get("dateDebut"));
-            e.setDateFin((Date)f.get("dateFin"));
+            Date ddebut = new Date(1000*((Double)((Map<String, Object>)f.get("datedebut")).get("timestamp")).longValue());
+                    e.setDateDebut(ddebut);
+            Date dfin = new Date(1000*((Double)((Map<String, Object>)f.get("datefin")).get("timestamp")).longValue());
+                    e.setDateFin(dfin);
+            //e.setDateFin((Date)f.get("dateFin"));
             //e.setCreatedAt((Date)f.get("createdAt"));
             e.setLieu((String) f.get("lieu"));
             
@@ -59,6 +63,12 @@ public class ServiceEvent {
         }        
         return listEvents;
         
+    }
+    
+    public User getLogin(Map m){
+        User u = new User();
+        u.setId(((Double) m.get("id")).intValue());
+        return u;
     }
     
     
@@ -90,7 +100,7 @@ public class ServiceEvent {
         ArrayList<Avis> listAvis= new ArrayList<>();
         ArrayList d = (ArrayList) m.get("root");
         //Map f =  (Map) d.get(0);
-        System.out.println("dddddddddddddd :::::::::"+d.size());
+        //System.out.println("dddddddddddddd :::::::::"+d.size());
 
         for(int i = 0; i<d.size();i++){
             Map f =  (Map) d.get(i);

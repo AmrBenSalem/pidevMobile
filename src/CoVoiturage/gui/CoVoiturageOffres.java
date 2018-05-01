@@ -46,10 +46,13 @@ public class CoVoiturageOffres {
         } else {
            this.f = new Form("Les demandes", new BoxLayout(BoxLayout.Y_AXIS)); 
         }
-
 //        Container list = new Container(new BoxLayout(BoxLayout.Y_AXIS));
 //        list.setScrollableY(true);
 
+        Toolbar tb = this.f.getToolbar();
+                tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+                    back.showBack();
+                });
         
 
         Map x = WebService.getResponse("covoiturage/api/offres?type="+type);
@@ -130,10 +133,7 @@ public class CoVoiturageOffres {
         }
         }
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getForm() {

@@ -22,9 +22,10 @@ import java.util.Map;
  */
 public class WebService {
     static Map h;
+    public static String ip="192.168.43.215";
     
     public static Map<String, Object> getResponse(String url){
-        url = "http://localhost/pidev2/web/app_dev.php/"+url;
+        url = "http://"+ip+"/pidev2/web/app.php/"+url;
         ConnectionRequest r = new ConnectionRequest();
         r.setUrl(url);
         //r.setPost(false);
