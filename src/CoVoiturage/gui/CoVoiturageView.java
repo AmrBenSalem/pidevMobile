@@ -38,6 +38,7 @@ public class CoVoiturageView {
     public CoVoiturageView() {
         this.f = new Form("CoVoiturage",new BoxLayout(BoxLayout.Y_AXIS));
         this.f.setToolbar(MyApplication.tb);
+        this.f.setTitle("CoVoiturage");
         
         try {
             ScaleImageLabel img1 = new ScaleImageLabel(Image.createImage("/SeparatorOffre.png"));

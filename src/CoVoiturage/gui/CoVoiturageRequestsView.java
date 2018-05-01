@@ -94,9 +94,9 @@ public class CoVoiturageRequestsView {
             Container left = new Container(new FlowLayout(LEFT));
             Container right = new Container(new FlowLayout(RIGHT));
             
-            Label by = new Label(cov.getCreated() + ", by " + cov.getIdc().getUser().getUserName());
-            by.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_ITALIC, Font.SIZE_SMALL));
-            left.add(by);
+            //Label by = new Label(cov.getCreated() + ", by " + cov.getIdc().getUser().getUserName());
+            //by.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_ITALIC, Font.SIZE_SMALL));
+            //left.add(by);
             
 
             Container bottom2 = new Container();

@@ -194,6 +194,7 @@ public class CoVoiturageOwn {
                     }
 
                     oneLine2.add(right2);
+                    oneLine2.setPreferredH(300);
                     try {
                         ScaleImageLabel img = new ScaleImageLabel(Image.createImage("/Separator.png"));
                         oneLine2.add(img);
