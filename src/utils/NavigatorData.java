@@ -5,7 +5,13 @@
  */
 package utils;
 
+
 import Objet.entities.FosUser;
+
+
+
+
+
 
 
 /**
@@ -23,6 +29,10 @@ public class NavigatorData {
 
     public int idParapharmacie;
     public int idCategorie;
+
     public FosUser connectedUser;
+
+    
+
     public float montant;
 }

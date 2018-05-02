@@ -31,9 +31,11 @@ public class CoVoiturageInfo {
     Form f;
 
     CoVoiturageInfo(Form back, CoVoiturage cov) {
-        System.out.println(cov);
         this.f = new Form("Informations", new BoxLayout(BoxLayout.Y_AXIS));
-
+        Toolbar tb = this.f.getToolbar();
+        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
+            back.showBack();
+        });
         Container departLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
         Container destinationLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
         Container placesLine = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -147,10 +149,7 @@ public class CoVoiturageInfo {
         this.f.add(browser);
 
         this.f.show();
-        Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e -> {
-            back.showBack();
-        });
+        
     }
 
     public Form getForm() {

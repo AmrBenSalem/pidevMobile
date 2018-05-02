@@ -34,89 +34,16 @@ public class CoVoiturageView {
     
     Form f;
     
-//    public CoVoiturageView(){
-//        this.f = new Form("aa");
-//        //this.f.add(new Label("ss"));
-//        this.f.setWidth(600);
-//        Tabs menu = new Tabs();
-//
-//        Container object = new Container();
-//        object.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container event = new Container();
-//        event.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container colocation = new Container();
-//        colocation.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container etudes = new Container();
-//        etudes.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        
-//        object.add(new Label("1"));
-//        Container covoiturage = new Container();
-//        covoiturage.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        covoiturage.add(new Label("2"));
-//        menu.addTab("Objects",object);
-//        menu.addTab("CoVoiturage",covoiturage);
-//        menu.addTab("coco", colocation);
-//        menu.addTab("coco", event);
-//        menu.addTab("coco", etudes);
-//        menu.setWidth(600);
-//        //menu.add(object);
-//        //menu.add(covoiturage);
-//        this.f.add(menu);
-//        //Map x = WebService.getResponse("covoiturage/api/days?idc=123");
-//        //System.out.println(x.get("covoiturage"));
-//        //System.out.println(CoVoiturageParser.getListCoVoiturageDays(x));
-//        /*Toolbar tb = this.f.getToolbar();
-//            
-//            tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e->{
-//            
-//            home.showBack();
-//            
-//            });*/
-//        this.getForm().show();
-//        
-//    }
 
     public CoVoiturageView() {
         this.f = new Form("CoVoiturage",new BoxLayout(BoxLayout.Y_AXIS));
         this.f.setToolbar(MyApplication.tb);
-        //this.f.add(new Label("ss"));
-//        Tabs menu = new Tabs();
-//
-//        Container object = new Container();
-//        object.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container event = new Container();
-//        event.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container colocation = new Container();
-//        colocation.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        Container etudes = new Container();
-//        etudes.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        
-//        object.add(new Label("1"));
-//        
-//        
-//      
-//        Container covoiturage = new Container();
-//        //covoiturage.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
-//        covoiturage.add(new Label("2"));
-        
-        /*menu.addTab("Objects",object);
-        menu.addTab("CoVoiturageView",covoiturage);
-        menu.addTab("coco", colocation);
-        menu.addTab("coco", event);
-        menu.addTab("coco", etudes);
-        menu.setWidth(600);
-        this.f.add(menu);*/
-        
-        
-        
-        /*Toolbar tb = this.f.getToolbar();
-        tb.addMaterialCommandToLeftBar("Back", FontImage.MATERIAL_ARROW_BACK, e->{
-            back.showBack();
-        });*/
+        this.f.setTitle("CoVoiturage");
         
         try {
             ScaleImageLabel img1 = new ScaleImageLabel(Image.createImage("/SeparatorOffre.png"));
             ScaleImageLabel img2 = new ScaleImageLabel(Image.createImage("/OffresCov2.png"));
+            img2.setPreferredW(900);
             this.getForm().add(img1);
             this.getForm().add(img2);
         } catch (IOException ex) {
@@ -143,6 +70,7 @@ public class CoVoiturageView {
             ScaleImageLabel img4 = new ScaleImageLabel(Image.createImage("/DemandeCov2.png"));
             this.getForm().add(img3);
             this.getForm().add(img4);
+            img4.setPreferredW(900);
         } catch (IOException ex) {
             //Logger.getLogger(CoVoiturageView.class.getName()).log(Level.SEVERE, null, ex);
         }
