@@ -45,18 +45,15 @@ public class MyApplication {
     private Resources theme;
     private Container mainContainer;
     public static Toolbar tb;
- 
 
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
-        
-       
-        
+
         // Pro only feature
-      //  Log.bindCrashProtection(true);
+        //  Log.bindCrashProtection(true);
     }
 
     public void start() {
@@ -65,26 +62,49 @@ public class MyApplication {
             return;
         }
         hi = new Form("Hi World");
-     
+
         tb = hi.getToolbar();
+    
+      User Bader = new User();
+        Bader.setId(1);
+        Bader.setUserName("baderch");
+        Db.getInstance().insertUser(Bader);
         
+        
+        /*
         User user = new User();
         user.setId(5);
         user.setUserName("amr");
-        Db.getInstance().insertUser(user);
+         Db.getInstance().insertUser(user);
         
-        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {AffichObjPerd a = new AffichObjPerd();
-        
-        });
-        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {  AffichObjTrouv a = new AffichObjTrouv();
-        });
-        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {  CoVoiturageView a = new CoVoiturageView();
-        });
+    
+*/
+      /* User essai = new User();
+        essai.setId(2);
+        essai.setUserName("essai");
+        Db.getInstance().insertUser(essai);*/
        
+     /*  User essai2 = new User();
+        essai2.setId(3);
+        essai2.setUserName("essai2");
+        Db.getInstance().insertUser(essai2);*/
+
+       
+
+        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
+            AffichObjPerd a = new AffichObjPerd();
+
+        });
+        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {
+            AffichObjTrouv a = new AffichObjTrouv();
+        });
+        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {
+            CoVoiturageView a = new CoVoiturageView();
+        });
 
         hi.addComponent(new Label("Hi World"));
         hi.show();
-       //AffichObjTrouv a =  new AffichObjTrouv();
+        //AffichObjTrouv a =  new AffichObjTrouv();
         /*  mainContainer = new Container();
         mainContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
@@ -111,7 +131,6 @@ public class MyApplication {
         user.setId(5);
         user.setUserName("amr");
         Db.getInstance().insertUser(user);*/
-
 
     }
 

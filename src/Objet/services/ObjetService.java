@@ -5,7 +5,7 @@
  */
 package Objet.services;
 
-import CoVoiturage.util.WebService;
+import Objet.util.WebService;
 import Objet.entities.Interaction;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -62,6 +62,8 @@ public class ObjetService {
             Objet o = new Objet();
             Double ll = (Double) f.get("id");
             o.setId(ll.intValue());
+              Double l2 = new Double(((Double) ((Map<String, Object>) f.get("user")).get("id")));
+            o.setUser(l2.intValue());
             //Double l2 = (Double) f.get("nb_max");
             //e.setNb_max(l2.intValue());
 
@@ -97,6 +99,8 @@ public class ObjetService {
             Objet o = new Objet();
             Double ll = (Double) f.get("id");
             o.setId(ll.intValue());
+            Double l2 = new Double(((Double) ((Map<String, Object>) f.get("user")).get("id")));
+            o.setUser(l2.intValue());
             //Double l2 = (Double) f.get("nb_max");
             //e.setNb_max(l2.intValue());
 
@@ -143,7 +147,7 @@ public class ObjetService {
 
     }
 
-    public void ajouterReclamationObjPerd(Objet o) {
+    public void ajouterReclamationObjPerd(Objet o,int id) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -152,12 +156,12 @@ public class ObjetService {
             }
         };
 
-        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
+        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + id);
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
 
-    public void ajouterReclamationObjTrouv(Objet o) {
+    public void ajouterReclamationObjTrouv(Objet o,int id) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -165,7 +169,7 @@ public class ObjetService {
             }
         };
 
-        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
+        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + id);
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
@@ -196,6 +200,9 @@ public class ObjetService {
                     String statut = (String) f.get("statut");
                     String username = new String(((String) ((Map<String, Object>) f.get("idUser")).get("username")));
                     inte.setNomuser(username);
+                      Double l2 = new Double(((Double) ((Map<String, Object>) f.get("idUser")).get("id")));
+                    inte.setUser(l2.intValue());
+                    
                     inte.setTelephone(telephone);
                     inte.setStatut(statut);
                     listobjet.add(inte);
