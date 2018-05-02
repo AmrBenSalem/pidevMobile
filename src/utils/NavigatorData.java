@@ -5,7 +5,11 @@
  */
 package utils;
 
-import CoVoiturage.entities.User;
+
+import Objet.entities.FosUser;
+
+
+
 
 
 
@@ -25,6 +29,10 @@ public class NavigatorData {
 
     public int idParapharmacie;
     public int idCategorie;
-    public User connectedUser;
+
+    public FosUser connectedUser;
+
+    
+
     public float montant;
 }

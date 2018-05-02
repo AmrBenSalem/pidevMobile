@@ -25,7 +25,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import CoVoiturage.util.WebService;
+import util.WebService;
 import com.codename1.components.SliderBridge;
 import com.codename1.ui.Button;
 import com.codename1.ui.Display;
@@ -145,6 +145,7 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
             bouhom.setLeadComponent(ph);
 
             f.add(bouhom);
+            f.show();
 
             ph.addPointerPressedListener(new ActionListener() {
                 @Override

@@ -11,14 +11,20 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.codename1.ui.Toolbar;
 import java.util.Map;
-import Colocation.gui.AddColocation;
-import Colocation.gui.AffichCol;
-import Colocation.gui.AffichageColoUSer;
-import Colocation.gui.AjouterColocation;
-import Colocation.gui.AjouterDemande;
+
+import CoVoiturage.util.WebService;
 import Colocation.gui.ColocationMenu;
+import Event.GUI.GUIEvent;
 import Objet.GUI.AffichObjPerd;
 import Objet.GUI.AffichObjTrouv;
+import Objet.GUI.LoginForm;
+import com.codename1.ui.Command;
+
+
+
+
+
+
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 
@@ -33,18 +39,15 @@ public class MyApplication {
     private Resources theme;
     private Container mainContainer;
     public static Toolbar tb;
- 
 
     public void init(Object context) {
         theme = UIManager.initFirstTheme("/theme");
 
         // Enable Toolbar on all Forms by default
         Toolbar.setGlobalToolbar(true);
-        
-       
-        
+
         // Pro only feature
-      //  Log.bindCrashProtection(true);
+        //  Log.bindCrashProtection(true);
     }
 
 
@@ -54,25 +57,87 @@ public class MyApplication {
             return;
         }
         hi = new Form("Hi World");
-     
+
         tb = hi.getToolbar();
+    
+     /* User Bader = new User();
+        Bader.setId(1);
+        Bader.setUserName("baderch");
+        Db.getInstance().insertUser(Bader);*/
         
+        
+        /*
         User user = new User();
         user.setId(5);
         user.setUserName("amr");
-        Db.getInstance().insertUser(user);
+         Db.getInstance().insertUser(user);
         
-        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {AffichObjPerd a = new AffichObjPerd();
-        
+    
+*/
+        User essai = new User();
+        essai.setId(2);
+        essai.setUserName("essai");
+        Db.getInstance().insertUser(essai); 
+       
+     /*  User essai2 = new User();
+        essai2.setId(3);
+        essai2.setUserName("essai2");
+        Db.getInstance().insertUser(essai2);*/
+
+       
+ 
+        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
+            AffichObjPerd a = new AffichObjPerd();
+
         });
-        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {  AffichObjTrouv a = new AffichObjTrouv();
+        tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {
+            AffichObjTrouv a = new AffichObjTrouv();
         });
-        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {  CoVoiturageView a = new CoVoiturageView();
+        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {
+            CoVoiturageView a = new CoVoiturageView();
         });
         tb.addMaterialCommandToSideMenu("CoLocation", FontImage.MATERIAL_WEB, e -> {  ColocationMenu a = new ColocationMenu();
         });
-        hi.addComponent(new Label("Hi World"));
-        hi.show();
+
+         tb.addMaterialCommandToSideMenu("Events", FontImage.MATERIAL_WEB, e -> {  GUIEvent a = new GUIEvent();
+        }); 
+        //GUIEvent a = new GUIEvent();
+      /*  LoginForm a = new LoginForm();
+        a.getF().show();*/
+         hi.addComponent(new Label("Hi World"));
+        hi.show(); 
+        //AffichObjTrouv a =  new AffichObjTrouv();
+        /*  mainContainer = new Container();
+        mainContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
+
+        mainForm = new Form();
+        mainForm.setLayout(new BorderLayout());
+        mainForm.add(BorderLayout.CENTER, mainContainer);
+        cmd1= new Command("afficher les objets perdus");
+        cmd2= new Command("afficher les objets trouvés");
+        
+        mainForm.addCommandListener(ev -> {
+            if (ev.getCommand() == cmd1) {
+                AffichObjPerd a = new AffichObjPerd();
+            }
+            if (ev.getCommand() == cmd2) {
+                AffichObjTrouv a = new AffichObjTrouv();
+            }
+        });
+                       
+        mainForm.setTitle("Les objets");
+        mainForm.show();
+      /*  Form hi = new Form("Hi World", BoxLayout.y());
+        hi.add(new Label("Hi World"));
+        User user = new User();
+        user.setId(5);
+        user.setUserName("amr");
+        Db.getInstance().insertUser(user);*/
+
+
+        
+        
+
     }
 
     public void stop() {
