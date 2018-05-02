@@ -25,9 +25,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import CoVoiturage.util.WebService;
+import Colocation.gui.ColocationMenu;
 import Event.GUI.GUIEvent;
 import Objet.GUI.AffichObjPerd;
 import Objet.GUI.AffichObjTrouv;
+import Objet.GUI.LoginForm;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
@@ -65,10 +67,10 @@ public class MyApplication {
 
         tb = hi.getToolbar();
     
-      User Bader = new User();
+     /* User Bader = new User();
         Bader.setId(1);
         Bader.setUserName("baderch");
-        Db.getInstance().insertUser(Bader);
+        Db.getInstance().insertUser(Bader);*/
         
         
         /*
@@ -79,10 +81,10 @@ public class MyApplication {
         
     
 */
-      /* User essai = new User();
+        User essai = new User();
         essai.setId(2);
         essai.setUserName("essai");
-        Db.getInstance().insertUser(essai);*/
+        Db.getInstance().insertUser(essai); 
        
      /*  User essai2 = new User();
         essai2.setId(3);
@@ -90,7 +92,7 @@ public class MyApplication {
         Db.getInstance().insertUser(essai2);*/
 
        
-
+ 
         tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
             AffichObjPerd a = new AffichObjPerd();
 
@@ -101,9 +103,15 @@ public class MyApplication {
         tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {
             CoVoiturageView a = new CoVoiturageView();
         });
-
-        hi.addComponent(new Label("Hi World"));
-        hi.show();
+        tb.addMaterialCommandToSideMenu("CoLocation", FontImage.MATERIAL_WEB, e -> {  ColocationMenu a = new ColocationMenu();
+        });
+         tb.addMaterialCommandToSideMenu("Events", FontImage.MATERIAL_WEB, e -> {  GUIEvent a = new GUIEvent();
+        }); 
+        //GUIEvent a = new GUIEvent();
+      /*  LoginForm a = new LoginForm();
+        a.getF().show();*/
+         hi.addComponent(new Label("Hi World"));
+        hi.show(); 
         //AffichObjTrouv a =  new AffichObjTrouv();
         /*  mainContainer = new Container();
         mainContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));

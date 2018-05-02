@@ -5,7 +5,10 @@
  */
 package Objet.GUI;
 
+import CoVoiturage.gui.CoVoiturageView;
 import CoVoiturage.util.Db;
+import Colocation.gui.ColocationMenu;
+import Event.GUI.GUIEvent;
 import Objet.util.WebService;
 import Objet.entities.Interaction;
 import com.codename1.ui.Button;
@@ -38,6 +41,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import static com.mycompany.myapp.MyApplication.tb;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -64,12 +68,20 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
         f = new Form("Les Objets Trouvés");
         Toolbar tb = f.getToolbar();
 
-        tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
+          tb.addMaterialCommandToSideMenu("Objets Perdus", FontImage.MATERIAL_HOME, e -> {
             AffichObjPerd a = new AffichObjPerd();
+
         });
         tb.addMaterialCommandToSideMenu("Objets Trouvés", FontImage.MATERIAL_WEB, e -> {
             AffichObjTrouv a = new AffichObjTrouv();
         });
+        tb.addMaterialCommandToSideMenu("CoVoiturage", FontImage.MATERIAL_WEB, e -> {
+            CoVoiturageView a = new CoVoiturageView();
+        });
+        tb.addMaterialCommandToSideMenu("CoLocation", FontImage.MATERIAL_WEB, e -> {  ColocationMenu a = new ColocationMenu();
+        });
+         tb.addMaterialCommandToSideMenu("Events", FontImage.MATERIAL_WEB, e -> {  GUIEvent a = new GUIEvent();
+        }); 
         ObjetService objserv = new ObjetService();
         Map x = WebService.getResponse("objtrouv");
         System.out.println("retour objets trouv" + x);
@@ -264,9 +276,9 @@ public class AffichObjTrouv extends SliderBridge implements Animation, StyleList
                         @Override
                         public void actionPerformed(ActionEvent evt) {
 
-                            String token = "";
+                            String token = "EAACEdEose0cBAD3dLmZBScTsKaR0r9bnHN8QUKRwU6Pi67a461HRCBhPuNTqXazB9ii39pseGDEkCvxKXPZAcLzoR1HQszwNNTOTI8Fie5iaRlVdBaZAFzJGGxXXkOCZC4mHOU03TagTZBmSQZAlUtRPN5Cqs08MmOMBSYlVfV9cJ4MInwc1sGcVVeirp18PCOswvF0jSHYc9OzQ989LEu";
                             FacebookClient fb = new DefaultFacebookClient(token);
-                            FacebookType r = fb.publish("me/feed", FacebookType.class, Parameter.with("message", o.toString()));
+                            FacebookType r = fb.publish("me/feed", FacebookType.class, Parameter.with("message", "Type :"+o.getType()+"\n"+" Description : "+o.getDescription()+"\n"+" Lieu : "+o.getLieu()));
                             System.out.println("fb.com" + r.getId());
 
                         }
