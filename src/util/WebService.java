@@ -25,12 +25,12 @@ public class WebService {
     
     public static Map<String, Object> getResponse(String url){
         url = "http://localhost/pidev2/web/app_dev.php/"+url;
-        System.out.println("url---------------"+url);
+        //System.out.println("url---------------"+url);
         ConnectionRequest r = new ConnectionRequest();
-        System.out.println("url ::::::::: "+url);
+        //System.out.println("url ::::::::: "+url);
         r.setUrl(url);
         r.setPost(false);
-        System.out.println("url   :   "+r);
+        //System.out.println("url   :   "+r);
         InfiniteProgress prog = new InfiniteProgress();
         Dialog dlg = prog.showInifiniteBlocking();
         r.setDisposeOnCompletion(dlg);
@@ -38,7 +38,7 @@ public class WebService {
             try {
                 JSONParser p = new JSONParser();
                 Reader targetReader = new InputStreamReader(new ByteArrayInputStream(r.getResponseData()));
-                System.out.println(targetReader);
+                //System.out.println(targetReader);
                 h= p.parseJSON(targetReader);
                 
             } catch (IOException ex) {
