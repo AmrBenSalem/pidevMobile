@@ -99,14 +99,15 @@ public class MyApplication {
         tb.addMaterialCommandToSideMenu("CoLocation", FontImage.MATERIAL_WEB, e -> {  ColocationMenu a = new ColocationMenu();
         });
 
+        
+
          tb.addMaterialCommandToSideMenu("Events", FontImage.MATERIAL_WEB, e -> {  GUIEvent a = new GUIEvent();
         }); 
-        //GUIEvent a = new GUIEvent();
-      /*  LoginForm a = new LoginForm();
-        a.getF().show();*/
-         hi.addComponent(new Label("Hi World"));
-        hi.show(); 
-        //AffichObjTrouv a =  new AffichObjTrouv();
+      
+      hi.addComponent(new Label("Hi World"));
+        //hi.show();
+        CoVoiturageView a = new CoVoiturageView();
+       //AffichObjTrouv a =  new AffichObjTrouv();
         /*  mainContainer = new Container();
         mainContainer.setLayout(new BoxLayout(BoxLayout.Y_AXIS));
 
