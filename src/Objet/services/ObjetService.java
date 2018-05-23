@@ -5,6 +5,7 @@
  */
 package Objet.services;
 
+import Objet.util.WebService;
 import Objet.entities.Interaction;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
@@ -61,6 +62,8 @@ public class ObjetService {
             Objet o = new Objet();
             Double ll = (Double) f.get("id");
             o.setId(ll.intValue());
+              Double l2 = new Double(((Double) ((Map<String, Object>) f.get("user")).get("id")));
+            o.setUser(l2.intValue());
             //Double l2 = (Double) f.get("nb_max");
             //e.setNb_max(l2.intValue());
 
@@ -96,6 +99,8 @@ public class ObjetService {
             Objet o = new Objet();
             Double ll = (Double) f.get("id");
             o.setId(ll.intValue());
+            Double l2 = new Double(((Double) ((Map<String, Object>) f.get("user")).get("id")));
+            o.setUser(l2.intValue());
             //Double l2 = (Double) f.get("nb_max");
             //e.setNb_max(l2.intValue());
 
@@ -110,6 +115,7 @@ public class ObjetService {
             //e.setCreatedAt((Date)f.get("createdAt"));
             o.setLieu((String) f.get("lieu"));
             String username = new String(((String) ((Map<String, Object>) f.get("user")).get("username")));
+
             o.setNature(username);
 
             //   e.setNb_max(((Double) f.get("nbMax")).intValue());
@@ -135,11 +141,13 @@ public class ObjetService {
         //  e.setNb_max(((Double) m.get("nbMax")).intValue());
         o.setPhoto(m.get("photo").toString());
 
+
+
         return o;
 
     }
 
-    public void ajouterReclamationObjPerd(Objet o) {
+    public void ajouterReclamationObjPerd(Objet o,int id) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -148,12 +156,12 @@ public class ObjetService {
             }
         };
 
-        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
+        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + id);
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
 
-    public void ajouterReclamationObjTrouv(Objet o) {
+    public void ajouterReclamationObjTrouv(Objet o,int id) {
         connectionRequest = new ConnectionRequest() {
             @Override
             protected void postResponse() {
@@ -161,7 +169,7 @@ public class ObjetService {
             }
         };
 
-        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + "1");
+        connectionRequest.setUrl("http://localhost/pidev2/web/app_dev.php/reclamer/" + o.getId() + "/" + id);
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
@@ -178,5 +186,31 @@ public class ObjetService {
         NetworkManager.getInstance().addToQueue(connectionRequest);
 
     }
+    
+    public ArrayList<Interaction> info(Objet o){
+                    Interaction inte = new Interaction();
+                    ArrayList<Interaction> listobjet = new ArrayList<>();
 
+                    Map x = WebService.getResponse("affichrec/" + o.getId());
+                    ArrayList d = (ArrayList) x.get("interaction");
+                    for (int i = 0; i < x.size(); i++)
+                    {
+                    Map f = (Map) d.get(i);
+                    String telephone = new String(((String) ((Map<String, Object>) f.get("idUser")).get("telephone")));
+                    String statut = (String) f.get("statut");
+                    String username = new String(((String) ((Map<String, Object>) f.get("idUser")).get("username")));
+                    inte.setNomuser(username);
+                      Double l2 = new Double(((Double) ((Map<String, Object>) f.get("idUser")).get("id")));
+                    inte.setUser(l2.intValue());
+                    
+                    inte.setTelephone(telephone);
+                    inte.setStatut(statut);
+                    listobjet.add(inte);
+                    System.out.println("aafafaf"+inte.toString());
+                    
+                    }
+                    return listobjet ;
+    }
+
+    // String telephone = new String(((String) ((Map<String, Object>) f.get("user")).get("telephone")));
 }
