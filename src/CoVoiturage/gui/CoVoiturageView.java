@@ -5,24 +5,11 @@
  */
 package CoVoiturage.gui;
 
-import CoVoiturage.entities.CoVoiturageRequests;
-import CoVoiturage.services.CoVoiturageParser;
-import com.codename1.ui.Container;
-import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
-import com.codename1.ui.Label;
-import com.codename1.ui.Tabs;
-import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BoxLayout;
-import java.util.Map;
-import CoVoiturage.util.WebService;
-import com.codename1.components.ImageViewer;
 import com.codename1.components.ScaleImageLabel;
 import com.codename1.ui.Button;
-import static com.codename1.ui.CN.CENTER;
 import com.codename1.ui.Image;
-import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.plaf.Style;
 import com.mycompany.myapp.MyApplication;
 import java.io.IOException;
 
