@@ -6,6 +6,7 @@
 package Event.GUI;
 
 import CoVoiturage.entities.User;
+import CoVoiturage.gui.CoVoiturageView;
 import CoVoiturage.services.CoVoiturageParser;
 import CoVoiturage.util.Db;
 import Event.Entities.Avis;
@@ -59,15 +60,28 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
 
         f = new Form();
 
+        Toolbar tb = f.getToolbar();
+
+        tb.addMaterialCommandToSideMenu("Covoiturage", FontImage.MATERIAL_HOME, e -> {
+            CoVoiturageView gui = new CoVoiturageView();
+            gui.getForm().show();
+
+        });
+
+        tb.addMaterialCommandToSideMenu("Evénements", FontImage.MATERIAL_HOME, e -> {
+            GUIEvent gui = new GUIEvent();
+            gui.getForm().show();
+
+        });
+
         ServiceEvent serviceevent = new ServiceEvent();
         Map x = WebService.getResponse("event/ej/");
         //Map x2 = WebService.getResponse("event/ej/16/6/4");
         //Map x4 = WebService.getResponse("event/ej/16/6/4");
-        
+
         //Map x3 = WebService.getResponse("event/ej/avis/event/2/");
         //System.out.println("--------------x--------------" + x);
         //System.out.println("--------------x22222222222--------------" + x4);
-
         //Event e = serviceevent.getEvent(x2);
         //int idevent = e.getId();
         //System.out.println(e.toString());
@@ -79,19 +93,23 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
             Image img;
             EncodedImage encoded = null;
             try {
-                encoded = EncodedImage.create("/images.png");
+                encoded = EncodedImage.create("/enactus.jpeg");
             } catch (IOException ex) {
                 //Logger.getLogger(GUIEvent.class.getName()).log(Level.SEVERE, null, ex);
             }
             //System.out.println("http://localhost/pidev2/web/" + ev.getPhoto());    
             img = URLImage.createToStorage(encoded, ev.getPhoto(), "http://localhost/pidev2/web/" + ev.getPhoto());
-            //img.scaled(50, 50);
+            img.scaled(1000, 1000);
             //System.out.println("http://localhost/pidev2/web/" + ev.getPhoto());
             imv = new ImageViewer(img);
+            imv.setWidth(1000);
+            imv.setHeight(1000);
 
             Container bouhom = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container sepa = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container title = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container dated = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            Container datef = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Container ctnnb = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
             //Image i = URLImage.createToStorage(encoded, ev.getPhoto(), "http://localhost/mobile/images/"+e.getPhoto());
@@ -111,6 +129,8 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
             Label nb = new Label("Nombre max : ");
             nb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
             Label l = new Label(ev.getTitre());
+            Label lbdated = new Label("Date début : " + ev.getDateDebut());
+            Label lbdatef = new Label("Date fin : " + ev.getDateFin());
             SpanLabel l2 = new SpanLabel(ev.getDescription());
             Label lnb = new Label(ev.getNb_max() + "");
             lnb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
@@ -124,6 +144,8 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
             //title.add(ph);
             title.add(tit);
             title.add(l);
+            dated.add(lbdated);
+            datef.add(lbdatef);
             C2.add(description);
             C2.add(l2);
             ctnnb.add(nb);
@@ -138,6 +160,8 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
             bouhom.add(ph);
             bouhom.add(title);
             bouhom.add(C2);
+            bouhom.add(dated);
+            bouhom.add(datef);
             bouhom.add(ctnnb);
 
             bouhom.add(sepa);
@@ -163,12 +187,13 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
                     Image im;
                     EncodedImage encod = null;
                     try {
-                        encod = EncodedImage.create("/images.png");
+                        encod = EncodedImage.create("/enactus.jpeg");
                     } catch (IOException ex) {
                         //Logger.getLogger(GUIEvent.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     //System.out.println("http://localhost/pidev2/web/" + ev.getPhoto());    
                     im = URLImage.createToStorage(encod, ev.getPhoto(), "http://localhost/pidev2/web/" + ev.getPhoto());
+                    im.scaled(1000, 1000);
                     imviewer = new ImageViewer(im);
 
                     Label lbtitle = new Label("Titre : " + ev.getTitre());
@@ -177,7 +202,21 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
                     Label lbdatefin = new Label("Date fin : " + ev.getDateFin());
                     SpanLabel lblieu = new SpanLabel("Lieu : " + ev.getLieu());
                     Label lbcateg = new Label("Catégorie : " + ev.getCategorie());
-
+                    Double ll = 0.0;
+                    Map avg = WebService.getResponse("event/ej/moy/rate/" + ev.getId() + "/avg");
+                    ArrayList ddd = (ArrayList) avg.get("root");
+                    for (int i = 0; i < ddd.size(); i++) {
+                        Map f = (Map) ddd.get(i);
+                        try{
+                        ll = Double.parseDouble( f.get("1").toString());
+                        }catch(NullPointerException e){
+                            System.out.println("null");
+                        }
+                        //System.out.println("l11111111111111"+ll);
+                    }
+                    //System.out.println("aaaaaaaaaaavvvvvvvvvvvvvvgggggggggg"+av);
+                    Label lbAvg = new Label("Avg Rate : " + ll);
+                    
                     lbtitle.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lbdescr.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
                     lbdatedeb.getAllStyles().setFont(Font.createSystemFont(Font.FACE_SYSTEM, Font.STYLE_BOLD, Font.SIZE_SMALL));
@@ -191,6 +230,8 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
                     f2.add(lbdatedeb);
                     f2.add(lbdatefin);
                     f2.add(lblieu);
+                    f2.add(lbAvg);
+
                     Slider rate = createStarRankSlider();
 
                     Button btnpRate = new Button("Donner Avis");
@@ -200,89 +241,72 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
                     Db d = Db.getInstance();
                     Date thisDate = new Date();
 
-                    if (d.getUser().getId() != ev.getIduser()     ) {
-                        
-                        Map ifParticipate = WebService.getResponse("event/ej/if/participate/"+d.getUser().getId()+"/"+ev.getId());
-                        System.out.println("If Participated ----------------" + ifParticipate);
+                    if (d.getUser().getId() != ev.getIduser()) {
+
+                        Map ifParticipate = WebService.getResponse("event/ej/if/participate/" + d.getUser().getId() + "/" + ev.getId());
+                        //.println("If Participated ----------------" + ifParticipate);
                         String s = ifParticipate.toString();
-                        System.out.println("ssssssssssssssssss" + s);
-                        Map ifRate = WebService.getResponse("event/ej/if/rate/"+d.getUser().getId()+"/"+ev.getId());
+                        //.println("ssssssssssssssssss" + s);
+                        Map ifRate = WebService.getResponse("event/ej/if/rate/" + d.getUser().getId() + "/" + ev.getId());
                         String s2 = ifRate.toString();
-                        System.out.println("s2222222222222"+s2);
-                        if (s.equals("{}")  &&   before(thisDate, ev.getDateDebut()) ) {
+                        //.println("s2222222222222" + s2);
+                        if (s.equals("{}") && before(thisDate, ev.getDateDebut())) {
                             f2.add(btnparticiper);
                         } else if (before(thisDate, ev.getDateFin())) {
 
                             f2.add(btnannuler);
-                            
-                            
 
                         }
-                        
-                        if (!(s2.equals("{}")) && after(thisDate, ev.getDateFin())){
-                            
+
+                        if (!(s2.equals("{}")) && after(thisDate, ev.getDateFin())) {
+
                             f2.add(FlowLayout.encloseCenter(rate));
                             f2.add(btnpRate);
-                        
+
                         }
-                        
-                        
 
                         btnparticiper.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent evt) {
 
                                 Map par = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/participer");
-                                System.out.println("paaaaaaaaar" + par);
+                                //.println("paaaaaaaaar" + par);
 
-                                System.out.println(ev.getId());
-                                GUIEvent gui = new GUIEvent();
-                                gui.getForm().show();
-
-                            }
-                        });
-                        
-                        
-                        
-                        
-                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    } 
-                        btnannuler.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent evt) {
-
-                                Map par = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/annuler");
-                                System.out.println("annuler----------" + par);
-                                Map annuler = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/annuler");
-                                GUIEvent gui = new GUIEvent();
-                                gui.getForm().show();
-                            }
-                        });
-
-                        btnpRate.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent evt) {
-                                
-                                
-                                int avis = rate.getProgress() / 2;
-                                System.out.println("rate-----------------" + avis);
-                                Map r = WebService.getResponse("event/ej/"+ev.getId()+"/"+d.getUser().getId()+"/"+avis);
-                                Map r2 = WebService.getResponse("event/ej/"+ev.getId()+"/"+d.getUser().getId()+"/"+avis);
-                                System.out.println("rrrrrrrrrr:::::::::" + r2);
+                                //.println(ev.getId());
                                 GUIEvent gui = new GUIEvent();
                                 gui.getForm().show();
 
                             }
                         });
 
-                    
+                    }
+                    btnannuler.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent evt) {
+
+                            Map par = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/annuler");
+                            //.println("annuler----------" + par);
+                            Map annuler = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/annuler");
+                            GUIEvent gui = new GUIEvent();
+                            gui.getForm().show();
+                        }
+                    });
+
+                    btnpRate.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent evt) {
+
+                            int avis = rate.getProgress() / 2;
+                            //System.out.println("rate-----------------" + avis);
+                            Map r = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/" + avis);
+                            Map r2 = WebService.getResponse("event/ej/" + ev.getId() + "/" + d.getUser().getId() + "/" + avis);
+                            //System.out.println("rrrrrrrrrr:::::::::" + r2);
+
+                            GUIEvent gui = new GUIEvent();
+                            gui.getForm().show();
+
+                        }
+                    });
 
                     f2.show();
 
@@ -327,8 +351,7 @@ public class GUIEvent extends SliderBridge implements Animation, StyleListener {
     boolean before(Date d1, Date d2) {
         return d1.getTime() < d2.getTime();
     }
-    
-    
+
     boolean after(Date d1, Date d2) {
         return d1.getTime() > d2.getTime();
     }
